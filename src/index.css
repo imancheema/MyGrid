@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Jost:wght@400;700');
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Jost:wght@400;700');
 :root {
+  /*
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  /*Theme Colours*/
   --font-color: black;
   --primary-color: #3A0152;
   --secondary-color: #E6FAA9CF;
@@ -15,8 +15,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  */
 }
 
+/*
 body {
   margin: 0;
   display: flex;
@@ -37,3 +39,4 @@ body {
     background-color: #f9f9f9;
   }
 }
+*/

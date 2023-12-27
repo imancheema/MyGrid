@@ -1,0 +1,55 @@
+.ProfileManagement .body{
+    margin: 0;
+    background-color: #F1F1FA;
+}
+
+.ProfileManagement .main{
+    margin-top: 2em;
+    margin-left: 5em;
+    margin-right: 5em;
+}
+
+.ProfileManagement .PageHeader{
+    margin-left: 10em;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.ProfileManagement form.Information{
+    margin-left: 27em;
+    margin-top: 3em;
+}
+
+.ProfileManagement form.Information label.end{
+    margin-left: 13.5em;
+    min-width: none;
+}
+
+.ProfileManagement form.Information input.halfbox{
+    margin-right: 1.5em;
+    width: 300px;
+    height: 30px;
+}
+
+.ProfileManagement form.Information input.fullbox{
+    margin-right: 1.5em;
+    width: 628px;
+    height: 30px;
+}
+
+.ProfileManagement form.Information button.cancel{
+    color: #57007B;
+    background-color: white;
+    border-color:#57007B;
+    border-radius: 1px;
+    width: 100px;
+    height: 25px;
+}
+
+.ProfileManagement form.Information button.save{
+    background-color: #57007B;
+    margin-left: 1em;
+    color: white;
+    width: 100px;
+    height: 25px;
+}
