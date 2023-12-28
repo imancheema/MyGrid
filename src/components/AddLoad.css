@@ -1,0 +1,72 @@
+
+
+.ModalBackground{
+    width: 100vw;
+    height: 100vh;
+    background-color: #F1F1FA;
+    position: fixed;
+    left:0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.Modalmain{
+    margin-top: 5em;
+    margin-left: 30em;
+    width: 600px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: lightblue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+}
+.Modalmain .ModalPageHeader{
+    margin-left: 5.5em;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.Modalmain form.Information{
+    background-color: white;
+    max-width: fit-content;
+    padding: 12px 12px 12px 12px;
+    margin-top: 5em;
+    margin-left: 5em;
+    border-radius:10px;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.Modalmain form.Information button.name{
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.Modalmain form.Information button.name:hover{
+    cursor: pointer;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.Modalmain form.Information input{
+    min-width: 400px;
+}
+
+.Modalmain form.Information button.submitdata{
+    margin-top: 1em;
+    padding: 0;
+    border: none;
+    border-style: solid;
+    border-radius: 10px;
+    background: none;
+    width: 100px;
+}
+
+.Modalmain form.Information button.submitdata:hover{
+    cursor: pointer;
+}
