@@ -1,0 +1,102 @@
+h1 {
+  padding: 0;
+  color: var(--font-color);
+  font-family: "Inter", sans-serif;
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+h2 {
+  padding-top: 1em;
+  color: var(--font-color);
+  font-family: "Inter", sans-serif;
+  font-size: 1.4em;
+  font-weight: 700;
+}
+
+h3 {
+  font-family: "Jost", sans-serif;
+  font-size: 1.3em;
+  font-weight: 700;
+}
+
+h4 {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-family: "Jost", sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.card p {
+  font-size: 15px;
+}
+
+.dashboard {
+  /* padding: 20px; */
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  text-align: center;
+  /* max-width: 1280px; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center;
+    align-items: center;  */
+  /* margin-left: 10em;  */
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.card:last-child {
+  margin-right: 0;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 5px 10px 5px;
+  border-top: 6px solid rgb(63, 8, 71);
+  text-align: center;
+  max-width: 300px;
+}
+
+.progress-bar {
+  margin-bottom: 15px;
+  width: 100%;
+  text-align: center;
+  font-weight: 500;
+  color: #333;
+}
+
+.progress-bar svg {
+  width: 200px;
+  height: 200px;
+}
+
+@media (max-width: 768px) {
+  @media (max-width: 768px) {
+    .card-container {
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card {
+      max-width: 100%;
+      margin: 0 0 10px 0;
+    }
+  }
+}

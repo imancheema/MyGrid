@@ -7,10 +7,8 @@ const LoadManagement = () => {
     const [openModal, setOpenModal] = useState(false);
 
     return(
-        <body>
-            <div>
-                <Navbar />
-            </div>
+        <>
+           <Navbar />
             <div id ="main" className="main">
                 <div className="PageHeader">Load Management</div>
                 <div className="PageText">Take full control over of your energy usage. Add, edit, or delete loads, and create personalized schedules for each to ensure optimal efficiency.</div>
@@ -61,7 +59,7 @@ const LoadManagement = () => {
                     {openModal && <AddLoad closeModal={setOpenModal} />}
                 </div>
             </div>
-        </body>
+        </>
     );
 };
 

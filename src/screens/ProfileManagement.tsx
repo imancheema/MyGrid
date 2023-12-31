@@ -14,7 +14,7 @@ type profile = {
 
 const ProfileManagement = () => {
     return(
-        <body className="ProfileManagement">
+        <div className="ProfileManagement">
             <div>
                 <Navbar />
             </div>
@@ -39,7 +39,7 @@ const ProfileManagement = () => {
             <br></br><br></br>
             <button className ="cancel">Cancel</button><button className="save">Save</button>
         </form>
-        </body>
+        </div>
     );
 };
 
