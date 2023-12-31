@@ -1,0 +1,59 @@
+.login-body {
+  font-family: "Jost", sans-serif;
+  color: var(--font-color);
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-body > div,
+.login-body > a {
+  text-align: center;
+}
+
+.account-nav {
+  background-color: #ffffff;
+  padding: 15px;
+}
+
+.info-container {
+  justify-content: space-around;
+  max-width: 1250px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.info-input {
+  width: 300px;
+  height: 30px;
+  border-radius: 6px;
+  text-decoration: none;
+  border-color: rgb(245, 225, 255);
+  padding-left: 20px;
+}
+
+h1 {
+  padding: 0;
+  color: var(--font-color);
+  font-family: "Inter", sans-serif;
+  font-size: 1.8em;
+  font-weight: 700;
+}
+
+.account-button {
+  color: #ffffff;
+  background-color: rgb(105, 0, 105);
+  width: 300px;
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 6px;
+}
+
+.invalid-text {
+  color: red;
+  text-align: center;
+  padding: 1px;
+}
