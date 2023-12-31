@@ -1,6 +1,7 @@
 import "./SimplePages.css";
 
-    return(
+const UserAuthPage = () => {
+    return (
       <body className="login-body">
         <div>
           <nav className="account-nav">

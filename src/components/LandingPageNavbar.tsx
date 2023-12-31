@@ -5,8 +5,12 @@ const LandingPageNavbar = () => {
     <div className="landing-page-navbar">
       <div className="logo">Logo</div>
       <div className="auth-buttons">
-        <button className="login-button">Login</button>
-        <button className="signup-button">Sign Up</button>
+        <a href="/Login">
+          <button className="login-button">Login</button>
+        </a>
+        <a href="/AccountCreate">
+          <button className="signup-button">Sign Up</button>
+        </a>
       </div>
     </div>
   );
