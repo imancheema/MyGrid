@@ -5,11 +5,21 @@ import Dashboard from "./screens/Dashboard";
 import NavBar from "./components/NavBar";
 import LoadManagement from "./screens/LoadManagement";
 import ProfileManagement from "./screens/ProfileManagement";
+import LoginPage from './screens/LoginPage';
+import AccountCreationPage from './screens/AccountCreationPage';
+import UserAuthPage from './screens/UserAuthPage';
+import AuthSuccessPage from './screens/AuthSuccessPage';
+
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path = "/" element={<LandingPage />} />
+        <Route path="/AccountCreate" element={<AccountCreationPage />} />
+        <Route path="/Login" element={<LoginPage/>}/>
+        <Route path="/UserAuth" element={<UserAuthPage/>}/>
+        <Route path="/AuthSuccess" element={<AuthSuccessPage/>}/>
         <Route path="/" element={<LandingPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/load-management" element={<LoadManagement />} />
