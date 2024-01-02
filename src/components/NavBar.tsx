@@ -31,7 +31,7 @@ const NavBar = () => {
           ></img>
         </a>
         <a href="/dashboard">My Dashboard</a>
-        <a href="/energy-analysis">Energy Analysis</a>
+        <a href="/EnergyAnalysis">Energy Analysis</a>
         <a href="/load-management">Load Management</a>
         <a href="/schedule">Schedule</a>
         <a href="/profile">Profile</a>

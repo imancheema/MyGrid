@@ -40,7 +40,7 @@ const ProfileManagement = () => {
                     <button className ="cancel">Cancel</button><button className="save">Save</button>
                 </form>
             </div>
-        </body>
+        </div>
     );
 };
 

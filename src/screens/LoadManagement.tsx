@@ -61,7 +61,7 @@ const LoadManagement = () => {
                     {openModal && <AddLoad closeModal={setOpenModal} />}
                 </div>
             </div>
-        </>
+        </body>
     );
 };
 
