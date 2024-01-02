@@ -1,0 +1,58 @@
+div.ViewMonth{
+    width: auto;
+    height: auto;
+}
+
+div.ViewMonth div.Month{
+    margin-top: 10px;
+    margin-left: 4em;
+    font-weight: bold;
+    font-size: 28px;
+    border-style: solid;
+    padding-left: 1em;
+    padding-right: 1em;
+    width: 100px;
+}
+
+div.ViewMonth table.WeekDays{
+    margin-left: 7em;
+}
+
+div.ViewMonth table.WeekDays tr.Day td{
+    text-align: center;
+    width: 150px;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+div.ViewMonth table.TableOutline{
+    margin-left: 7em;
+
+}
+
+div.ViewMonth table.TableOutline tr.Week td{
+    width: 150px;
+    border: solid;
+}
+div.ViewMonth table.TableOutline tr.Week td div.Number{
+    font-size: 25px;
+    text-align: center;
+}
+
+div.ViewMonth table.TableOutline tr.Week td div.Item{
+    font-size: 10px;
+    text-align: center;
+}
+
+div.ViewMonth table.TableOutline tr.Week td div.red{
+    background-color: rgba(190,18,60,0.2);
+}
+
+div.ViewMonth table.TableOutline tr.Week td div.green{
+    background-color: rgba(245,158,11,0.2);
+}
+
+div.ViewMonth table.TableOutline tr.Week td div.blue{
+    background-color: rgba(14,165,233,0.2);
+}

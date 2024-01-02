@@ -3,20 +3,20 @@ body{
     background-color: #F1F1FA;
 }
 
-.main{
+.LoadManagement .main{
     margin-top: 2em;
     margin-left: 5em;
     margin-right: 5em;
 }
 
-.PageHeader{
+.LoadManagement .PageHeader{
     margin-left: 3.5em;
     font-size: 36px;
     font-weight: bold;
 
 }
 
-.PageText{
+.LoadManagement .PageText{
     margin-top: 1em;
     margin-left: 6em;
     font-size: 20px;
@@ -24,37 +24,37 @@ body{
 
 table.LoadTable{
     border-collapse: separate; 
-    border-spacing: 150px 40px;
+    border-spacing: 150px 30px;
 }
 
-table.LoadTable td{
+.LoadManagement table.LoadTable td{
     width: 250px;
     height: 200px;
     background-color: white;
 }
-table.LoadTable div.Load-Head{
+.LoadManagement table.LoadTable div.Load-Head{
     margin-top: 0;
     font-size: 28px;
     text-align: center;
 }
 
-table.LoadTable div.Load-Value{
+.LoadManagement table.LoadTable div.Load-Value{
     font-size: 48px;
     text-align: center;
     font-weight: bold;;
     margin-top: 5px;
 }
 
-table.LoadTable div.Load-Value{
+.LoadManagement table.LoadTable div.Load-Value{
     font-size: 36px;
     text-align: center;
     font-weight: bold;
 }
 
-table.LoadTable button:hover{
+.LoadManagement table.LoadTable button:hover{
     cursor: pointer;
 }
-table.LoadTable button.Edit{
+.LoadManagement table.LoadTable button.Edit{
     border-radius: 50px;
     background-color: #AEF89C;
     border: none;
@@ -66,7 +66,7 @@ table.LoadTable button.Edit{
     margin-right: 10px;
 }
 
-table.LoadTable button.Delete{
+.LoadManagement table.LoadTable button.Delete{
     border-radius: 50px;
     background-color: #F97171;
     border: none;
@@ -76,7 +76,7 @@ table.LoadTable button.Delete{
     height:30px;
 }
 
-table.LoadTable button.View{
+.LoadManagement table.LoadTable button.View{
     border-radius: 50px;
     background-color: #078EE0;
     border: none;
@@ -89,10 +89,11 @@ table.LoadTable button.View{
     margin-bottom: 10px;
 }
 
-.Display{
+.LoadManagement .Display{
     width:100vw;
 }
-button.Add{
+
+.LoadManagement button.Add{
     font-size: 32px;
     border-radius: 100%;
     background-color: #57007B;
@@ -103,11 +104,11 @@ button.Add{
     height: 50px;
 }
 
-button.Add:hover{
+.LoadManagement button.Add:hover{
     cursor: pointer;
 }
 
-span.AddText{
+.LoadManagement span.AddText{
     font-size: 24px;
     margin-left: 1em;
     font-weight: bold;

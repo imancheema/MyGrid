@@ -7,7 +7,7 @@ const LoadManagement = () => {
     const [openModal, setOpenModal] = useState(false);
 
     return(
-        <body>
+        <body className="LoadManagement">
             <div>
                 <Navbar />
             </div>

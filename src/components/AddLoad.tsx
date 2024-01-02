@@ -1,4 +1,3 @@
-
 import "./AddLoad.css";
 
 const AddLoad = ({closeModal}: any) => {
