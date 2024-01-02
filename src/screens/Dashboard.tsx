@@ -13,8 +13,10 @@ const Dashboard: React.FC = () => {
   return (
     <>
       <NavBar />
+      <div className="bg"></div>
       <div className="dashboard">
-        <h1>Dashboard</h1>
+        <h1>Battery Dashboard</h1>
+        <h2>Hi, Name!</h2>
         <p>
           Welcome to the Dashboard, the central hub for your energy journey. In
           real-time, monitor critical metrics such as State of Charge (SoC),
@@ -22,7 +24,6 @@ const Dashboard: React.FC = () => {
           your battery storage system.
         </p>
         <div>
-          <h2>Battery Storage System Status</h2>
           <div className="card-container">
             <div className="card">
               <h3>State of Charge</h3>
