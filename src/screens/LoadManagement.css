@@ -1,16 +1,48 @@
 body {
   margin: 0;
-  background-color: #f1f1fa;
+  padding: 0;
 }
 
-.main {
+.load-management h1 {
+  color: var(--font-color);
+  font-family: "Inter", sans-serif;
+  font-size: 2.2em;
+  font-weight: 700;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.load-management p {
+  margin-bottom: 2em;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.load-management-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #e1e5ec;
+  z-index: -1;
+}
+
+.load-management {
   margin-top: 2em;
+  text-align: center;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
 }
 
 .PageHeader {
-  margin-left: 3.5em;
-  font-size: 36px;
-  font-weight: bold;
+  margin-left: 20px;
+  font-size: 2.2em;
+  font-weight: 700;
+  color: var(--font-color);
+  text-align: left;
 }
 
 .PageText {
@@ -20,82 +52,88 @@ body {
 }
 
 table.LoadTable {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   border-collapse: separate;
-  border-spacing: 150px 40px;
+  border-spacing: 20px;
 }
 
 table.LoadTable td {
   width: 250px;
   height: 200px;
   background-color: white;
-}
-table.LoadTable div.Load-Head {
-  margin-top: 0;
-  font-size: 28px;
-  text-align: center;
+  border-radius: 12px;
+  flex-direction: column;
 }
 
-table.LoadTable div.Load-Value {
-  font-size: 48px;
+table.LoadTable div.Load-Head {
+  font-size: 28px;
   text-align: center;
-  font-weight: bold;
-  margin-top: 5px;
+  margin-bottom: 10px;
 }
 
 table.LoadTable div.Load-Value {
   font-size: 36px;
   text-align: center;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 table.LoadTable button:hover {
   cursor: pointer;
 }
-table.LoadTable button.Edit {
+
+table.LoadTable button.Edit,
+table.LoadTable button.Delete,
+table.LoadTable button.View {
   border-radius: 50px;
-  background-color: #aef89c;
+  font-size: 16px;
   border: none;
   color: white;
-  width: 100px;
-  height: 30px;
   margin-top: 10px;
-  margin-left: 20px;
-  margin-right: 10px;
 }
 
+table.LoadTable button.Edit,
 table.LoadTable button.Delete {
-  border-radius: 50px;
-  background-color: #f97171;
-  border: none;
-  color: white;
-  margin-top: 10px;
   width: 100px;
   height: 30px;
+  margin-right: 10px;
 }
 
 table.LoadTable button.View {
-  border-radius: 50px;
-  background-color: #078ee0;
-  border: none;
-  color: white;
   width: 210px;
-  height: 50px;
-  margin-left: 20px;
-  margin-right: 10px;
+  height: 30px;
   margin-top: 10px;
   margin-bottom: 10px;
+  background-color: var(--view-button-color);
+}
+
+table.LoadTable button.Edit {
+  background-color: var(--edit-button-color);
+}
+
+table.LoadTable button.Delete {
+  background-color: var(--delete-button-color);
 }
 
 .Display {
-  width: 100vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
+
 button.Add {
   font-size: 32px;
   border-radius: 100%;
   background-color: #57007b;
   border: none;
   color: white;
-  margin-left: 17em;
+  margin-left: 20px;
   width: 50px;
   height: 50px;
 }
