@@ -5,6 +5,8 @@ import Dashboard from "./screens/Dashboard";
 import NavBar from "./components/NavBar";
 import LoadManagement from "./screens/LoadManagement";
 import ProfileManagement from "./screens/ProfileManagement";
+import EnergyAnalysis from './screens/EnergyAnalysis';
+import Schedule from './screens/Schedule';
 import LoginPage from './screens/LoginPage';
 import AccountCreationPage from './screens/AccountCreationPage';
 import UserAuthPage from './screens/UserAuthPage';
@@ -16,6 +18,11 @@ function App() {
     <Router>
       <Routes>
         <Route path = "/" element={<LandingPage />} />
+        <Route path = "/Nav" element={<NavBar />} />
+        <Route path = "/LoadManagement" element={<LoadManagement />} />
+        <Route path = "/Profile" element={<ProfileManagement />} />
+        <Route path = "/EnergyAnalysis" element={<EnergyAnalysis />} />
+        <Route path = "/Schedule" element={<Schedule />} />
         <Route path="/AccountCreate" element={<AccountCreationPage />} />
         <Route path="/Login" element={<LoginPage/>}/>
         <Route path="/UserAuth" element={<UserAuthPage/>}/>
