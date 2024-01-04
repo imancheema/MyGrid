@@ -1,12 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Jost:wght@300;400;500;700");
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Jost:wght@400;700');
 :root {
-  /* line-height: 1.5;
-  font-weight: 400; */
-
   --font-color: black;
-  --primary-color: #3A0152;
-  --secondary-color: #E6FAA9CF;
+  --font-color-two: grey;
+  --font-color-three: white;
+  --primary-color: #3a0152;
+  --primary-color-two: #57007b;
+  --secondary-color: #e6faa9cf;
+  --background-color: #ffffff;
+  --card-border-color: #badfe7;
+  --card-border-color-two: #f0b2f1;
+  --card-border-color-three: #6fb3b8;
+  --side-bar-color: #4361ee;
+  --edit-button-color: #8de078;
+  --delete-button-color: #f97171;
+  --view-button-color: #078ee0;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;

@@ -1,49 +1,81 @@
-h1 {
+.dashboard h1 {
   padding: 0;
   color: var(--font-color);
   font-family: "Inter", sans-serif;
   font-size: 2.2em;
   font-weight: 700;
+  text-align: left;
+  margin-left: 20px;
+  margin-bottom: 0;
 }
 
-h2 {
-  padding-top: 1em;
+.dashboard h2 {
   color: var(--font-color);
   font-family: "Inter", sans-serif;
-  font-size: 1.4em;
-  font-weight: 700;
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  color: var(--font-color-two);
+  font-weight: 400;
 }
 
 h3 {
-  font-family: "Jost", sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 1.3em;
-  font-weight: 700;
+  font-weight: 600;
+}
+
+.state-of-charge h3 {
+  color: #badfe7;
 }
 
 h4 {
   margin-top: 0.5em;
   margin-bottom: 0;
   font-family: "Jost", sans-serif;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 700;
+}
+
+/* .bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #d4f7d5, #b2ebf7);
+  opacity: 0.4;
+  filter: blur(80px);
+  border-radius: 60%;
+} */
+
+.bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: #f3f3e8;
 }
 
 .card p {
   font-size: 15px;
 }
 
+.dashboard p {
+  margin-bottom: 2em;
+  text-align: left;
+  margin-left: 20px;
+}
+
 .dashboard {
-  /* padding: 20px; */
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   text-align: center;
-  /* max-width: 1280px; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center;
-    align-items: center;  */
-  /* margin-left: 10em;  */
+  position: relative;
 }
 
 .card-container {
@@ -57,20 +89,31 @@ h4 {
   margin-right: 0;
 }
 
+.card:nth-child(1) {
+  border-top: 6px solid var(--card-border-color);
+}
+
+.card:nth-child(2) {
+  border-top: 6px solid var(--card-border-color-two);
+}
+
+.card:nth-child(3) {
+  border-top: 6px solid var(--card-border-color-three);
+}
+
 .card {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: #ffffff;
   padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin: 0 5px 10px 5px;
-  border-top: 6px solid rgb(63, 8, 71);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  margin: 0 20px 20px 20px;
   text-align: center;
-  max-width: 300px;
+  max-width: 285px;
 }
 
 .progress-bar {
@@ -78,25 +121,22 @@ h4 {
   width: 100%;
   text-align: center;
   font-weight: 500;
-  color: #333;
+  color: var(--font-color);
 }
 
 .progress-bar svg {
-  width: 200px;
-  height: 200px;
+  width: 175px;
+  height: 175px;
 }
 
 @media (max-width: 768px) {
-  @media (max-width: 768px) {
-    .card-container {
-      justify-content: flex-start;
-      flex-direction: column;
-      align-items: center;
-    }
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .card {
-      max-width: 100%;
-      margin: 0 0 10px 0;
-    }
+  .card {
+    width: 100%;
+    margin-bottom: 30px;
   }
 }
