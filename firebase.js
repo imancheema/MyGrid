@@ -6,7 +6,7 @@ const {
 } = require("firebase/firestore/lite");
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCq46pXc4XJiPLrSIfp_U-mmXoagxWIlZ0",
+  apiKey: process.env.FIREBASE_API_KEY,
   authDomain: "battery-storage-optimization.firebaseapp.com",
   projectId: "battery-storage-optimization",
   storageBucket: "battery-storage-optimization.appspot.com",
