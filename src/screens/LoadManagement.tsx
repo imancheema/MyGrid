@@ -1,10 +1,10 @@
 import "./LoadManagement.css";
 import Navbar from "../components/NavBar";
 import AddLoad from "../components/AddLoad";
-import {useState} from "react";
+import { useState } from "react";
 
 const LoadManagement = () => {
-    const [openModal, setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
     return(
         <body className="LoadManagement">
