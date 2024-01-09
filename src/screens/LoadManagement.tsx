@@ -19,40 +19,34 @@ const LoadManagement = () => {
                         <td>
                             <div className ="Load-Head" id="Load-Head1">Heater</div>
                             <div className="Load-Value" id="Load-Value">1.5kWh</div>
-                            <div><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
-                            <div><button className="View">View Schedule</button></div>
+                            <div className="Options"><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
                         </td>
                         <td>
                             <div className ="Load-Head" id="Load-Head1">Heater</div>
                             <div className="Load-Value" id="Load-Value">1.5kWh</div>
-                            <div><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
-                            <div><button className="View">View Schedule</button></div>
+                            <div className="Options"><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
                         </td>
                         <td>
                             <div className ="Load-Head" id="Load-Head1">Heater</div>
                             <div className="Load-Value" id="Load-Value">1.5kWh</div>
-                            <div><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
-                            <div><button className="View">View Schedule</button></div>
+                            <div className="Options"><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div className ="Load-Head" id="Load-Head1">Heater</div>
                             <div className="Load-Value" id="Load-Value">1.5kWh</div>
-                            <div><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
-                            <div><button className="View">View Schedule</button></div>
+                            <div className="Options"><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
                         </td>
                         <td>
                             <div className ="Load-Head" id="Load-Head1">Heater</div>
                             <div className="Load-Value" id="Load-Value">1.5kWh</div>
-                            <div><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
-                            <div><button className="View">View Schedule</button></div>
+                            <div className="Options"><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
                         </td>
                         <td>
                             <div className ="Load-Head" id="Load-Head1">Heater</div>
                             <div className="Load-Value" id="Load-Value">1.5kWh</div>
-                            <div><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
-                            <div><button className="View">View Schedule</button></div>
+                            <div className="Options"><button className="Edit">Edit</button><button className="Delete">Delete</button></div>
                         </td>
                     </tr>
                 </table>

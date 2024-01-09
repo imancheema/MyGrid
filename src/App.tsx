@@ -12,7 +12,6 @@ import AccountCreationPage from './screens/AccountCreationPage';
 import UserAuthPage from './screens/UserAuthPage';
 import AuthSuccessPage from './screens/AuthSuccessPage';
 
-
 function App() {
   return (
     <Router>
@@ -31,24 +30,6 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/load-management" element={<LoadManagement />} />
         <Route path="/profile" element={<ProfileManagement />} />
-        <Route
-          path="/energy-analysis"
-          element={
-            <>
-              <NavBar />
-              <p> Not yet implemented</p>
-            </>
-          }
-        />
-        <Route
-          path="/schedule"
-          element={
-            <>
-              <NavBar />
-              <p> Not yet implemented</p>
-            </>
-          }
-        />
       </Routes>
     </Router>
   );
