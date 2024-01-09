@@ -1,5 +1,4 @@
 import "./Schedule.css";
-import Navbar from "../components/NavBar";
 import Schedule2 from "../components/Schedule2";
 
 
