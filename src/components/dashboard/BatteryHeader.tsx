@@ -1,6 +1,11 @@
 import React from "react";
+import { Battery } from "../../models/battery";
 
-const BatteryHeader = ({ battery }) => {
+interface IBatteryHeader {
+  battery: Battery;
+}
+
+const BatteryHeader = ({ battery }: IBatteryHeader) => {
   return (
     <div className="battery-info">
       <div>
