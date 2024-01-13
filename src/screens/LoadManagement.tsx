@@ -30,9 +30,6 @@ const LoadManagement = () => {
                 <button className="Edit">Edit</button>
                 <button className="Delete">Delete</button>
               </div>
-              <div>
-                <button className="View">View Schedule</button>
-              </div>
             </td>
             <td>
               <div className="Load-Head" id="Load-Head1">
@@ -45,9 +42,6 @@ const LoadManagement = () => {
                 <button className="Edit">Edit</button>
                 <button className="Delete">Delete</button>
               </div>
-              <div>
-                <button className="View">View Schedule</button>
-              </div>
             </td>
             <td>
               <div className="Load-Head" id="Load-Head1">
@@ -59,9 +53,6 @@ const LoadManagement = () => {
               <div>
                 <button className="Edit">Edit</button>
                 <button className="Delete">Delete</button>
-              </div>
-              <div>
-                <button className="View">View Schedule</button>
               </div>
             </td>
           </tr>
@@ -77,9 +68,6 @@ const LoadManagement = () => {
                 <button className="Edit">Edit</button>
                 <button className="Delete">Delete</button>
               </div>
-              <div>
-                <button className="View">View Schedule</button>
-              </div>
             </td>
             <td>
               <div className="Load-Head" id="Load-Head1">
@@ -92,9 +80,6 @@ const LoadManagement = () => {
                 <button className="Edit">Edit</button>
                 <button className="Delete">Delete</button>
               </div>
-              <div>
-                <button className="View">View Schedule</button>
-              </div>
             </td>
             <td>
               <div className="Load-Head" id="Load-Head1">
@@ -106,9 +91,6 @@ const LoadManagement = () => {
               <div>
                 <button className="Edit">Edit</button>
                 <button className="Delete">Delete</button>
-              </div>
-              <div>
-                <button className="View">View Schedule</button>
               </div>
             </td>
           </tr>
