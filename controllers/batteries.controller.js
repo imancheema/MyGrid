@@ -1,4 +1,4 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -16,4 +16,4 @@ router.get("/", async (req, res) => {
 // get measurements by batteryId
 // get measurements by batteryId and time
 
-module.exports = router;
+export default router;
