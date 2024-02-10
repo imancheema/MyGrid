@@ -1,9 +1,16 @@
-const { initializeApp } = require("firebase/app");
-const {
+import { initializeApp } from "firebase/app";
+import {
   getFirestore,
   collection,
   getDocs,
-} = require("firebase/firestore/lite");
+  getDoc,
+  doc,
+  updateDoc,
+  addDoc,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore/lite";
 
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
@@ -19,6 +26,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-module.exports.db = db;
-module.exports.collection = collection;
-module.exports.getDocs = getDocs;
+const firebase = {
+  db,
+  getFirestore,
+  collection,
+  getDocs,
+  getDoc,
+  doc,
+  updateDoc,
+  addDoc,
+  deleteDoc,
+  query,
+  where,
+};
+
+export default firebase;

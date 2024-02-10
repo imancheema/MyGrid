@@ -1,6 +1,6 @@
-const { getUsers } = require("../services/users.service");
+import express from "express";
+import { getUsers } from "../services/users.service.js";
 
-const express = require("express");
 const router = express.Router();
 
 //gets all users
@@ -18,4 +18,4 @@ router.get("/", async (req, res) => {
   //delete user
 });
 
-module.exports = router;
+export default router;

@@ -1,14 +1,16 @@
 // required imports
-const express = require("express");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import "dotenv/config";
 
 // controller imports
-const usersController = require("./controllers/users.controller");
-const batteriesController = require("./controllers/batteries.controller");
+import usersController from "./controllers/users.controller.js";
+import batteriesController from "./controllers/batteries.controller.js";
 
 // initializations
-const port = 3000;
+export const port = process.env.BE_DEV_PORT || 3000;
 const app = express();
+app.use(express.json());
 app.use(cors());
 
 app.use("/users", usersController);
