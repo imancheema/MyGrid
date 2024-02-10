@@ -19,17 +19,122 @@ b { /* used for event dates/times */
 }
 
 .Schedule-sidebar {
-  width: 200px;
+  width: 180px;
   line-height: 1.5;
   background: #eaf9ff;
   border-right: 1px solid #d3e2e8;
   padding-bottom: 0px;
+  border-style: solid;
 }
 
 .Schedule-sidebar-section {
   padding: 1em;
   padding-top: 0px;
+  border-right: 1px;
 }
+
+.Schedule-sidebar-section div.fc-event{
+  margin-top: 5px;
+  text-align: center;
+  width: 100px;
+  border: 1px;
+  border-style: solid;
+  margin-left: 25px;
+  background-color: bisque;
+  user-select: none;
+}
+
+.Schedule-sidebar button.recur{
+  margin-left: 10px;
+  font-size: 14px;
+  height: 30px;
+  width: 160px;
+  background-color: bisque;
+}
+
+.Schedule-sidebar button.recur:hover{
+  cursor: pointer;
+}
+
+.Schedule-sidebar dialog.modal{
+  width: 800px;
+  height:350px;
+  background-color: rgb(161, 196, 227);
+}
+
+.Schedule-sidebar dialog.modal span.Title{
+  padding-left: 18em;
+  padding-right: 18em;
+  border-style: solid;
+  border-radius: 1px;
+  font-size: 16px;
+  background-color: white;;
+}
+
+.Schedule-sidebar dialog.modal button.exit{
+  font-size: 16px;
+  font-weight: bold;
+  background-color: none;
+  background: none;
+  margin-left: 1em;
+  width: 2.5em;
+}
+
+.Schedule-sidebar dialog.modal button.exit:hover{
+  cursor:pointer;
+}
+
+.Schedule-sidebar dialog.modal div.info{
+  background-color: white;
+  margin-top: 1em;
+  border-style: solid;
+  border-radius: 1px;
+  width: 56.5em;
+  height: 300px;
+}
+
+.Schedule-sidebar dialog.modal div.info div.q1,div.q2,div.q3, div.q4, div.q5{
+  margin-top: 0.5em;
+  margin-left: 5em;
+  font-size:16px;
+}
+
+.Schedule-sidebar dialog.modal div.info select.loads,input.input2,input.input3{
+  position : absolute;
+  right: 200px;
+  font-size: 16px;
+}
+
+.Schedule-sidebar dialog.modal div.info select.loads{
+  width: 125px;
+  text-align: center;
+}
+
+.Schedule-sidebar dialog.modal div.info input.input2, input.input3{
+  text-align: center;
+  width: 120px;
+}
+
+.Schedule-sidebar dialog.modal div.info div.day{
+  margin-left: 10em;
+}
+
+.Schedule-sidebar dialog.modal div.info div.day label{
+  margin-left:2em;
+}
+
+.Schedule-sidebar dialog.modal div.info div.day input{
+  margin-left:2.68em;
+}
+
+.Schedule-sidebar dialog.modal div.info label.daily{
+  margin-left: 18em;
+}
+
+.Schedule-sidebar dialog.modal div.info label.monthly{
+  margin-left: 2em;
+}
+
 
 .Calendar {
   flex-grow: 1;
