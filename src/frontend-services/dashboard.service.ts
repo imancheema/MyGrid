@@ -8,6 +8,13 @@ interface ICreateBattery {
   description?: string,
 }
 
+export interface Battery {
+  batteryId: string;
+  name: string;
+  type?: string;
+  description?: string;
+}
+
 export const createBattery = async({name , type, description}: ICreateBattery) => {
   try {
     const response = await axios.post(`${BASE_URL}/batteries/`, {
@@ -29,3 +36,22 @@ export const getAllBatteries = async() => {
     throw new Error(`Unable to fetch all batteries: ${error}`);
   }
 };
+
+export const deleteBattery = async(batteryId: string) => {
+  try {
+    const response = await axios.delete(`${BASE_URL}/batteries/${batteryId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Unable to delete battery with id=[${batteryId}] ${error}`)
+  }
+}
+
+export const updateBattery = async (battery: Battery) => {
+  try {
+    const response = await axios.put(`${BASE_URL}/batteries/${battery.batteryId}`, battery);
+    return response.data;
+  } catch (error) {
+    throw new Error(`Unable to update battery with id=[${battery.batteryId}]: ${error}`);
+  }
+};
+
