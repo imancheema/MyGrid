@@ -10,6 +10,7 @@ import {
   deleteDoc,
   query,
   where,
+  setDoc,
 } from "firebase/firestore/lite";
 
 const firebaseConfig = {
@@ -38,6 +39,7 @@ const firebase = {
   deleteDoc,
   query,
   where,
+  setDoc,
 };
 
 export default firebase;
