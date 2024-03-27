@@ -22,7 +22,10 @@ const Dashboard: React.FC = () => {
   const [batteries, setBatteries] = useState([]);
 
   useEffect(() => {
-    getAllBatteries().then((response) => setBatteries(response.batteries));
+    getAllBatteries().then((response) => {
+      console.log("---getbatteries", response);
+      setBatteries(response.batteries);
+    });
     setIsBatteryAdded(false);
   }, [isBatteryAdded]);
 

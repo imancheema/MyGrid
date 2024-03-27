@@ -72,7 +72,7 @@ router.post("/", async (req, res) => {
 // update battery details
 router.put("/:batteryId", async (req, res) => {
   try {
-    const batteryId = req.params.id;
+    const batteryId = req.params.batteryId;
     const { name, type, description } = req.body;
     const updatedData = {
       name,
@@ -95,7 +95,8 @@ router.put("/:batteryId", async (req, res) => {
 // delete battery
 router.delete("/:batteryId", async (req, res) => {
   try {
-    const batteryId = req.params.id;
+    const batteryId = req.params.batteryId;
+
     const result = await deleteBattery(batteryId);
     res.status(200).send({
       status: "Success",
