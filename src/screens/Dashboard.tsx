@@ -9,7 +9,7 @@ import {
   getAllBatteries,
 } from "../frontend-services/dashboard.service.ts";
 import { Battery } from "../models/battery.ts";
-import BatteryHeader from "../components/dashboard/BatteryHeader.tsx";
+import BatteryHeader from "../components/Header/BatteryHeader.tsx";
 
 const Dashboard: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
