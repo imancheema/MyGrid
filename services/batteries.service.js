@@ -25,14 +25,18 @@ export async function getBatteryById(batteryId) {
 export async function createBattery(batteryData) {
   try {
     console.log("Creating battery with data:", batteryData);
+
     //TODO: check if battery has the same name
+
     const batteriesCollection = firebase.collection(db, "batteries");
-    const newBatteryRef = await firebase.addDoc(batteriesCollection, {
+    const batteryRef = firebase.doc(batteriesCollection);
+    await firebase.setDoc(batteryRef, {
       name: batteryData.name,
       type: batteryData.type || null,
       description: batteryData.description || null,
+      batteryId: batteryRef.id,
     });
-    return newBatteryRef.id;
+    return batteryRef.id;
   } catch (error) {
     console.error("Error creating battery:", error);
     throw new Error(error.message);
@@ -53,7 +57,7 @@ export async function deleteBattery(batteryId) {
   try {
     const batteryRef = firebase.doc(db, "batteries", batteryId);
     await firebase.deleteDoc(batteryRef);
-    return "Battery deleted successfully";
+    return true;
   } catch (error) {
     throw new Error("Failed to delete battery: " + error.message);
   }
