@@ -1,5 +1,5 @@
 import React from "react";
-import { Battery } from "../../models/battery";
+import { Battery } from "../../models/battery.ts";
 
 interface IBatteryHeader {
   battery: Battery;

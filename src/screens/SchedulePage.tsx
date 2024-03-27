@@ -1,7 +1,7 @@
 import "./Schedule.css";
 import Schedule2 from "../components/Schedule2";
 
-const Schedule = () => {
+const SchedulePage = () => {
     return(
         <body className="Mainbody">
             <div id ="main" className="main">
@@ -11,4 +11,4 @@ const Schedule = () => {
     );
 };
 
-export default Schedule;
+export default SchedulePage;
