@@ -28,3 +28,12 @@ export const createUser = async({email, password, firstName, lastName, phoneNum,
       throw new Error(`Unable to create user: ${error}`);
     }
   };
+
+  export const getUserByEmail = async(email: string) => {
+    try {
+      const response = await axios.get(`${BASE_URL}/users/${email}`);
+      return response;
+    } catch (error) {
+      throw new Error(`Unable to find user by email: ${error}`);
+    }
+  };

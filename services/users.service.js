@@ -33,12 +33,13 @@ export async function createUser(userData){
 
 export async function getUserByEmail(userEmail){
   try{
-    const userReference = firebase.doc(db, "users", userEmail);
-    const userSnapshot = await firebase.getDoc(userReference);
-    if (!userSnapshot.exists()) {
+    const userCollection = firebase.collection(db, "users");
+    const userSnapshot = await firebase.getDocs(userCollection);
+    const user = userSnapshot.docs.map((doc) => ({...doc.data(), id:doc.id})).filter((user)=> user.email === userEmail)
+    if (!user.length) {
       throw new Error("User not found");
     }
-    return { id: userSnapshot.id, ...userSnapshot.data() };
+    return user;
   } catch (error) {
     throw new Error("Failed to get user: " + error.message);
   }

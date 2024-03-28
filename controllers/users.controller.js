@@ -55,14 +55,15 @@ router.post("/", async (req,res) => {
 router.get("/:userEmail", async(req, res) => {
   try{
     const { userEmail } = req?.params;
+    console.log('Hello' + userEmail);
     if (!userEmail) {
       throw new Error("Email is a required param");
     }
-    const email = await getUserByEmail(userEmail); //Create this method in user.services
+    const user = await getUserByEmail(userEmail); //Create this method in user.services
 
     res.status(200).send({
       status: "Success",
-      email,
+      user,
     });
   } catch (error) {
     res.status(404).send({
