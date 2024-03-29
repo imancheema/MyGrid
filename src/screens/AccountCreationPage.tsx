@@ -47,6 +47,7 @@ const LoginPage = () => {
       const newUserCredential: UserCredential = await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
       await sendEmailVerification(newUserCredential.user);
       await addUser();
+      window.location.href = "http://localhost:5173/Login";
       } catch (error) {
         if (error.code === "auth/invalid-email" || error.code === "auth/email-already-exists"){
           setEmailErr(false);
@@ -54,6 +55,7 @@ const LoginPage = () => {
         if (error.code === "auth/weak-password" || error.code === "auth/missing-password"){
           setWeakPassErr(false)
         }
+        console.log(error);
       }
     }
     else {

@@ -12,6 +12,17 @@ interface ICreateUser {
     postalCode: string,
 }
 
+export const updateUser = async (user: ICreateUser) => {
+  try{
+    const userKey = JSON.parse(sessionStorage.getItem("user") || "");
+    const response = await axios.put(`${BASE_URL}/users/${userKey.id}`, user)
+    return response.data;
+  } catch (error) {
+    console.log("Unable to update user profile");
+    console.log(error)
+  }
+}
+
 export const createUser = async({email, password, firstName, lastName, phoneNum, city, postalCode}: ICreateUser) => {
     try {
       const response = await axios.post(`${BASE_URL}/users/`, {

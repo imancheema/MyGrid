@@ -41,18 +41,17 @@ const LoginPage = () => {
           if(user.emailVerified){
             const response = await getUserByEmail(email)
             sessionStorage.setItem("user", JSON.stringify(response.data.user[0]));
-            const blah = JSON.parse(sessionStorage.getItem("user") || "");
-            console.log(blah);
-            window.location.href = "http://localhost:5173/";
+            window.location.href = "http://localhost:5173/dashboard";
           }
           else{
             setShowVerifyErr(false)
           }
           // ...
         } catch (error) {
-          if(error.code === "auth/invalid-email" || error.code === "auth/missing-password"){
+          if(error.code === "auth/invalid-email" || error.code === "auth/missing-password" || error.code === "auth/invalid-credential"){
             setShowCredErr(false)
           }
+          console.log(error)
         }
   }
 
@@ -73,7 +72,7 @@ const LoginPage = () => {
           <br/>
           <label htmlFor="password">Password</label>
           <br/>
-          <input className="info-input" type="text" id="password" name="password" placeholder="password"></input>
+          <input className="info-input" type="password" id="password" name="password" placeholder="password"></input>
           <br/>
           <div hidden={showCredErr} className="invalid-text" id="invalid-creds">Invalid credentials please try again</div>
           <div hidden={showVerifyErr} className="invalid-text" id="not-verified">Please verify your email and try again</div>
