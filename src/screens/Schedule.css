@@ -1,11 +1,10 @@
-.body.Schedule{
-    margin: 0;
-    background-color: #F1F1FA;
-    overflow: hidden;
+.body.Schedule {
+  margin: 0;
+  overflow: hidden;
 }
 
-.Schedule .main{
-    margin-top: 2em;
-    margin-left: 5em;
-    margin-right: 5em;
+.Schedule .main {
+  margin-top: 2em;
+  margin-left: 5em;
+  margin-right: 5em;
 }
