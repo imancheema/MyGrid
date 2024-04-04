@@ -19,15 +19,6 @@ export async function getBatteries() {
     const measurementsSnapshot = await firebase.getDocs(measurementsQuery);
     const measurements = measurementsSnapshot.docs.map((doc) => doc.data());
     battery.measurements = measurements;
-    // let measurementsFromDoc = [];
-    // firebase.getDocs(measurementsQuery).then((measurementsSnapshot) => {
-    //   const measurements = measurementsSnapshot.docs.map((doc) => doc.data());
-    //   measurementsFromDoc = measurements;
-    //   battery.measurements = measurements;
-
-    //   return battery;
-    // });
-
     return battery;
   });
 
