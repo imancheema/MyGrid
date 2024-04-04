@@ -15,17 +15,27 @@
 }
 
 .battery-buttons button.edit-button {
-  background-color: #189afc;
+  font-family: "Jost", sans-serif;
+  background-color: var(--edit-battery-button);
   color: white;
+  font-size: 15px;
+}
+
+.edit-icon,
+.delete-icon {
+  margin-right: 10px;
+  font-size: 14px;
 }
 
 .battery-buttons button.delete-button {
-  background-color: #f44336;
+  font-family: "Jost", sans-serif;
+  background-color: var(--delete-battery-button);
   color: white;
+  font-size: 15px;
 }
 
 .battery-buttons button:hover {
-  opacity: 0.8;
+  background-color: var(--delete-battery-button-hover);
 }
 
 .battery-buttons button + button {

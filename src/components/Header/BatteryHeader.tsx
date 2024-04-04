@@ -58,12 +58,13 @@ const BatteryHeader = ({ battery }: IBatteryHeader) => {
       </div>
       <div className="battery-buttons">
         <button className="edit-button" onClick={openEditModal}>
-          Edit
+          <i className="fas fa-edit edit-icon"></i> Edit
         </button>
         <button className="delete-button" onClick={removeBattery}>
-          Delete
+          <i className="fas fa-trash-alt delete-icon"></i> Delete
         </button>
       </div>
+
       {isEditModalOpen && (
         <div className="modal-overlay">
           <div className={`edit-modal ${isEditModalOpen ? "show" : ""}`}>
