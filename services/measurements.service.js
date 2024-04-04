@@ -1,0 +1,96 @@
+import firebase from "../firebase.js";
+const db = firebase.db;
+
+export async function addMeasurementByBatteryId(
+  batteryId,
+  {
+    time,
+    current,
+    voltageConsumption,
+    voltageGeneration,
+    temperature,
+    powerConsumption,
+    powerGeneration,
+    chargeRate,
+    dischargeRate,
+  }
+) {
+  try {
+    console.log("Adding measurement by battery ID to database:", batteryId);
+
+    const measurementsCollection = firebase.collection(db, "measurements");
+    const measurementRef = firebase.doc(measurementsCollection);
+    const batteryRef = firebase.doc(db, "batteries", batteryId);
+    await firebase.setDoc(measurementRef, {
+      batteryId: batteryRef,
+      time,
+      current,
+      voltageConsumption,
+      voltageGeneration,
+      temperature,
+      powerConsumption,
+      powerGeneration,
+      chargeRate,
+      dischargeRate,
+    });
+
+    console.log("Measurement added successfully.");
+  } catch (error) {
+    console.error("Error adding measurement by battery ID to database:", error);
+    throw error; // Re-throw the caught error
+  }
+}
+
+const getRandom = (min, max, precision) => {
+  const value = Math.random() * (max - min) + min;
+  return value.toFixed(precision) * 1;
+};
+
+export async function simulateData({
+  batteryId,
+  numberOfEntries = 1,
+  withLoad,
+  numberOfLoads = 1,
+}) {
+  const responses = [];
+  for (let i = 0; i < numberOfEntries; i++) {
+    let variant = 0;
+
+    if (withLoad) {
+      variant = getRandom(0, 1, 2);
+    }
+    let time = Date.now() - i * 60000;
+    let current = getRandom(14, 15, 2) + numberOfLoads * variant;
+    let voltageConsumption =
+      getRandom(104, 109, 6) - numberOfLoads * variant * 2;
+    let voltageGeneration =
+      getRandom(104, 109, 6) - numberOfLoads * variant * 0.5;
+    let temperature = getRandom(298, 301, 6) + numberOfLoads * variant;
+    let powerConsumption =
+      voltageConsumption * current + numberOfLoads * variant;
+    let powerGeneration = voltageGeneration * current;
+    let chargeRate = (powerGeneration - powerConsumption) / voltageGeneration;
+    let dischargeRate =
+      (powerConsumption - powerGeneration) / voltageConsumption;
+
+    try {
+      const res = await addMeasurementByBatteryId(batteryId, {
+        time,
+        current,
+        voltageConsumption,
+        voltageGeneration,
+        temperature,
+        powerConsumption,
+        powerGeneration,
+        chargeRate,
+        dischargeRate,
+      });
+      responses.push(res);
+    } catch (error) {
+      console.log(
+        "Unable to add simulated measurement...skipping this loop",
+        error
+      );
+    }
+  }
+}
