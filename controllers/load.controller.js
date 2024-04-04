@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
   const loads = await getLoads();
   res.status(200).send({
     status: "Success",
-    message: `Successfully retrieved batteries ${JSON.stringify(loads)}`,
+    message: `Successfully retrieved loads ${JSON.stringify(loads)}`,
     loads,
   });
 });
@@ -43,7 +43,7 @@ router.get("/:UserID", async (req, res) => {
 // create a load
 router.post("/:UserID", async (req, res) => {
   try {
-    const { Name, Type, Powerusage } = req?.body;
+    const { Name, Type, Powerusage, batteryId } = req?.body;
     const { UserID } = req?.params;
     if (!Name) {
       throw new Error("Missing request parameter: Name");
@@ -53,6 +53,7 @@ router.post("/:UserID", async (req, res) => {
       Name,
       Type,
       Powerusage,
+      batteryId,
     };
     const LoadId = await createLoad(LoadData, UserID);
     res.status(201).send({
@@ -72,13 +73,20 @@ router.post("/:UserID", async (req, res) => {
 router.patch("/:userId", async (req, res) => {
   try {
     const UserId = req.params.userId;
-    const { Name, Type, Powerusage } = req.body;
+    const { Name, Type, Powerusage, batteryId } = req.body;
+
     const updatedData = {
       Name,
       Type,
       Powerusage,
+      batteryId,
     };
-    const resultMessage = await updateLoad(UserId, { Name, Powerusage, Type });
+    const resultMessage = await updateLoad(UserId, {
+      Name,
+      Powerusage,
+      Type,
+      batteryId,
+    });
     res.status(200).send({
       status: "Success",
       message: resultMessage,

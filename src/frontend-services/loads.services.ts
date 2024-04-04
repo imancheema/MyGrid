@@ -3,18 +3,20 @@ import axios from "axios";
 const BASE_URL = `http://localhost:3000`;
 
 interface ICreateLoad {
-  Id: string,
-  Name: string,
-  Type?: string, 
-  Powerusage?: number,
+  Id: string;
+  Name: string;
+  Type?: string;
+  Powerusage?: number;
+  batteryId: string;
 }
 
-export const createLoad = async({Name , Type, Powerusage}: ICreateLoad, Uid: String) => {
+export const createLoad = async({Name , Type, Powerusage, batteryId}: ICreateLoad, Uid: String) => {
   try {
     const response = await axios.post(`${BASE_URL}/loads/${Uid}`, {
       Name,
       Type,
-      Powerusage
+      Powerusage,
+      batteryId,
     });
     return response;
   } catch (error) {
@@ -22,12 +24,13 @@ export const createLoad = async({Name , Type, Powerusage}: ICreateLoad, Uid: Str
   }
 };
 
-export const editLoad = async({Name , Type, Powerusage, Id}: ICreateLoad) => {
+export const editLoad = async({Name , Type, Powerusage, Id, batteryId}: ICreateLoad) => {
   try {
     const response = await axios.patch(`${BASE_URL}/loads/${Id}`, {
       Name,
       Type,
-      Powerusage
+      Powerusage,
+      batteryId,
     });
     return response;
   } catch (error) {

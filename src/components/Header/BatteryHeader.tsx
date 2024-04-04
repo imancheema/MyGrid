@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import "./BatteryHeader.css";
+import React, { useState, useEffect } from "react";
 import { Battery } from "../../models/battery";
 import {
   deleteBattery,
@@ -12,6 +13,12 @@ interface IBatteryHeader {
 const BatteryHeader = ({ battery }: IBatteryHeader) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editedBattery, setEditedBattery] = useState<Battery>({ ...battery });
+
+  useEffect(() => {
+    if (isEditModalOpen) {
+      setEditedBattery({ ...battery });
+    }
+  }, [isEditModalOpen, battery]);
 
   const removeBattery = async () => {
     await deleteBattery(battery.batteryId);
@@ -50,35 +57,41 @@ const BatteryHeader = ({ battery }: IBatteryHeader) => {
         {battery.description ? <p>Description: {battery.description}</p> : null}
       </div>
       <div className="battery-buttons">
-        <button onClick={openEditModal}>Edit</button>
-        <button onClick={removeBattery}>Delete</button>
+        <button className="edit-button" onClick={openEditModal}>
+          Edit
+        </button>
+        <button className="delete-button" onClick={removeBattery}>
+          Delete
+        </button>
       </div>
       {isEditModalOpen && (
-        <div className="edit-modal">
-          <h2>Edit Battery</h2>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={editedBattery.name}
-            onChange={handleInputChange}
-          />
-          <label>Type:</label>
-          <input
-            type="text"
-            name="type"
-            value={editedBattery.type || ""}
-            onChange={handleInputChange}
-          />
-          <label>Description:</label>
-          <textarea
-            name="description"
-            value={editedBattery.description || ""}
-            onChange={handleInputChange}
-          />
-          <div className="modal-buttons">
-            <button onClick={handleEditBattery}>Save</button>
-            <button onClick={closeEditModal}>Cancel</button>
+        <div className="modal-overlay">
+          <div className={`edit-modal ${isEditModalOpen ? "show" : ""}`}>
+            <h2>Edit Battery</h2>
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={editedBattery.name}
+              onChange={handleInputChange}
+            />
+            <label>Type:</label>
+            <input
+              type="text"
+              name="type"
+              value={editedBattery.type || ""}
+              onChange={handleInputChange}
+            />
+            <label>Description:</label>
+            <textarea
+              name="description"
+              value={editedBattery.description || ""}
+              onChange={handleInputChange}
+            />
+            <div className="modal-buttons">
+              <button onClick={handleEditBattery}>Save</button>
+              <button onClick={closeEditModal}>Cancel</button>
+            </div>
           </div>
         </div>
       )}

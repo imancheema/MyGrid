@@ -37,6 +37,22 @@ export const getAllBatteries = async() => {
   }
 };
 
+// export const getMostRecentMeasurementForBattery = async (batteryId: string) => {
+//   try {
+//     const response = await axios.get(`${BASE_URL}/batteries/${batteryId}/measurements`);
+//     return response.data.measurements;
+//   } catch (error) {
+//     throw new Error(`Unable to fetch measurements for batteryId=[${batteryId}]: ${error}`);
+//   }
+// }
+
+
+export const simulateData = async (batteryId: string, withLoad: boolean, numberOfLoads: number) => {
+  await axios.post(`${BASE_URL}/batteries/${batteryId}/simulate`, {
+    withLoad,
+    numberOfLoads,
+  });
+}
 export const deleteBattery = async(batteryId: string) => {
   try {
     const response = await axios.delete(`${BASE_URL}/batteries/${batteryId}`);
