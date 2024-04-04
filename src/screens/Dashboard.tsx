@@ -4,7 +4,6 @@ import Chart from "chart.js/auto";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "./Dashboard.css";
-import "../components/dashboard/BatteryHeader.css";
 import NavBar from "../components/NavBar";
 import {
   createBattery,
