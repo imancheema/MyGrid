@@ -12,7 +12,7 @@ import {
   simulateData,
 } from "../frontend-services/dashboard.service.ts";
 import { Battery } from "../models/battery.ts";
-import BatteryHeader from "../components/dashboard/BatteryHeader.tsx";
+import BatteryHeader from "../components/Header/BatteryHeader.tsx";
 
 // type Measurements = {
 //   chargeRate: number;
