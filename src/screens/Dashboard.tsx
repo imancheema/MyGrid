@@ -227,27 +227,23 @@ const Dashboard: React.FC = () => {
                       can affect battery efficiency and lifespan.
                     </p>
                   </div>
-                  <h3>Temperature</h3>
-                  <div className="progress-bar">
-                    <CircularProgressbar
-                      value={parseFloat(
+                  <div className="metric">
+                    <h3>Temperature</h3>
+                    <div className="temperature-icon">
+                      <i className="fas fa-thermometer-half"></i>{" "}
+                      {/* Temperature icon */}
+                    </div>
+                    <p className="metric-value">
+                      {parseFloat(
                         (battery?.measurements[0]?.temperature ?? 0).toFixed(2)
                       )}
-                      text={`${parseFloat(
-                        (battery?.measurements[0]?.temperature ?? 0).toFixed(2)
-                      )}K`}
-                      className="progress-bar-state-of-charge"
-                      strokeWidth={8}
-                      styles={buildStyles({
-                        textColor: "#333",
-                        pathTransition: "none",
-                        trailColor: "#eee",
-                      })}
-                    />
+                      K
+                    </p>
                   </div>
                   {/* <h4>HEALTH INDICATOR</h4> */}
                   <p>The battery is in a moderate state</p>
                 </div>
+
                 <div className="card">
                   <div
                     className="info-icon"
