@@ -9,28 +9,50 @@ import NavBar from "../components/NavBar";
 import {
   createBattery,
   getAllBatteries,
+  simulateData,
 } from "../frontend-services/dashboard.service.ts";
 import { Battery } from "../models/battery.ts";
 import BatteryHeader from "../components/dashboard/BatteryHeader.tsx";
 
+// type Measurements = {
+//   chargeRate: number;
+//   current: number;
+//   dischargeRate: number;
+//   powerConsumption: number;
+//   powerGeneration: number;
+//   temperature: number;
+//   time: Date;
+//   voltageConsumption: number;
+//   voltageGeneration: number;
+// };
+
+type BatteriesState = {
+  batteryId: string;
+  description?: string;
+  name: string;
+  type: string;
+  measurements: [];
+};
+
 const Dashboard: React.FC = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [addedNewMeasurement, setAddedNewMeasurement] = useState(false);
   const [batteryInfo, setBatteryInfo] = useState({
     name: "",
     type: "",
     description: "",
   });
   const [isBatteryAdded, setIsBatteryAdded] = useState(false);
-  const [batteries, setBatteries] = useState([]);
+  const [batteries, setBatteries] = useState<BatteriesState[]>([]);
   const [infoIconHovered, setInfoIconHovered] = useState(-1);
 
   useEffect(() => {
     getAllBatteries().then((response) => {
-      console.log("---getbatteries", response);
       setBatteries(response.batteries);
     });
     setIsBatteryAdded(false);
-  }, [isBatteryAdded]);
+    setAddedNewMeasurement(false);
+  }, [isBatteryAdded, addedNewMeasurement]);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -56,10 +78,10 @@ const Dashboard: React.FC = () => {
     setIsBatteryAdded(true);
   };
 
-  const stateOfCharge = 33;
-  const temperature = 94;
-  const chargeRate = 40;
-  const dischargeRate = 28;
+  const simulateMeasurements = (batteryId: string) => {
+    simulateData(batteryId, true, 1);
+    setAddedNewMeasurement(true);
+  };
 
   return (
     <>
@@ -104,8 +126,8 @@ const Dashboard: React.FC = () => {
                   <h3>State of Charge</h3>
                   <div className="progress-bar">
                     <CircularProgressbar
-                      value={stateOfCharge}
-                      text={`${stateOfCharge}%`}
+                      value={battery?.measurements[0]?.stateOfCharge ?? 0}
+                      text={`${battery?.measurements[0]?.stateOfCharge ?? 0}%`}
                       className="progress-bar-state-of-charge"
                       strokeWidth={10}
                       styles={buildStyles({
@@ -140,8 +162,12 @@ const Dashboard: React.FC = () => {
                   <h3>Temperature</h3>
                   <div className="progress-bar">
                     <CircularProgressbar
-                      value={temperature}
-                      text={`${temperature}%`}
+                      value={
+                        battery?.measurements[0]?.temperature.toFixed(2) ?? 0
+                      }
+                      text={`${
+                        battery?.measurements[0]?.temperature.toFixed(2) ?? 0
+                      }°C`}
                       className="progress-bar-state-of-charge"
                       strokeWidth={10}
                       styles={buildStyles({
@@ -176,11 +202,16 @@ const Dashboard: React.FC = () => {
                   <h3>Charge Ratings</h3>
                   <div className="metric">
                     <h4>Charge Rate</h4>
-                    <p className="metric-value">{chargeRate} kW</p>
+                    <p className="metric-value">
+                      {battery?.measurements[0]?.chargeRate.toFixed(2) ?? 0} kW
+                    </p>
                   </div>
                   <div className="metric">
                     <h4>Discharge Rate</h4>
-                    <p className="metric-value">{dischargeRate} kW</p>
+                    <p className="metric-value">
+                      {battery?.measurements[0]?.dischargeRate.toFixed(2) ?? 0}{" "}
+                      kW
+                    </p>
                   </div>
                   {/* <h4>POWER STATE</h4> */}
                   <div className="efficiency-status">
@@ -209,8 +240,8 @@ const Dashboard: React.FC = () => {
                   <h3>State of Health</h3>
                   <div className="progress-bar">
                     <CircularProgressbar
-                      value={temperature}
-                      text={`${temperature}°C`}
+                      value={battery?.measurements[0]?.stateOfHealth ?? 0}
+                      text={`${battery?.measurements[0]?.stateOfHealth ?? 0}%`}
                       className="progress-bar-temperature"
                       strokeWidth={10}
                       styles={buildStyles({
@@ -225,6 +256,47 @@ const Dashboard: React.FC = () => {
                 </div>
                 {/* Power generation/consumption chart card */}
               </div>
+              <div className="card">
+                <div
+                  className="info-icon"
+                  onMouseEnter={() => setInfoIconHovered(index)}
+                  onMouseLeave={() => setInfoIconHovered(-1)}
+                >
+                  <i className="fas fa-info-circle"></i>
+                </div>
+                <div
+                  className={
+                    infoIconHovered === index ? "info-tag" : "info-tag hidden"
+                  }
+                >
+                  <p>The power generation is. the power consumption is.</p>
+                </div>
+                <h3>Power</h3>
+                <div className="metric">
+                  <h4>Power Consumption</h4>
+                  <p className="metric-value">
+                    {battery?.measurements[0]?.powerConsumption.toFixed(2) ?? 0}{" "}
+                    kW
+                  </p>
+                </div>
+                <div className="metric">
+                  <h4>Power Generation</h4>
+                  <p className="metric-value">
+                    {battery?.measurements[0]?.powerGeneration.toFixed(2) ?? 0}{" "}
+                    kW
+                  </p>
+                </div>
+                {/* <h4>POWER STATE</h4> */}
+                <div className="efficiency-status">
+                  <p>The system is operating efficiently</p>
+                </div>
+              </div>
+              <button
+                className="add-battery-button"
+                onClick={() => simulateMeasurements(battery.batteryId)}
+              >
+                Simulate Measurements
+              </button>
             </>
           ))}
           {isModalOpen && (
