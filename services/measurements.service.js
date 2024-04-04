@@ -13,6 +13,8 @@ export async function addMeasurementByBatteryId(
     powerGeneration,
     chargeRate,
     dischargeRate,
+    stateOfHealth,
+    stateOfCharge,
   }
 ) {
   try {
@@ -23,7 +25,7 @@ export async function addMeasurementByBatteryId(
     const batteryRef = firebase.doc(db, "batteries", batteryId);
     await firebase.setDoc(measurementRef, {
       batteryId: batteryRef,
-      time,
+      timestamp: time,
       current,
       voltageConsumption,
       voltageGeneration,
@@ -32,6 +34,8 @@ export async function addMeasurementByBatteryId(
       powerGeneration,
       chargeRate,
       dischargeRate,
+      stateOfHealth,
+      stateOfCharge,
     });
 
     console.log("Measurement added successfully.");
@@ -73,6 +77,9 @@ export async function simulateData({
     let dischargeRate =
       (powerConsumption - powerGeneration) / voltageConsumption;
 
+    let stateOfHealth = getRandom(80, 95, 2) - numberOfLoads * variant;
+    let stateOfCharge = getRandom(73, 97, 2) - numberOfLoads * variant;
+
     try {
       const res = await addMeasurementByBatteryId(batteryId, {
         time,
@@ -84,6 +91,8 @@ export async function simulateData({
         powerGeneration,
         chargeRate,
         dischargeRate,
+        stateOfHealth,
+        stateOfCharge,
       });
       responses.push(res);
     } catch (error) {
