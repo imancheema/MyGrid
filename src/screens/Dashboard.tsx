@@ -82,6 +82,68 @@ const Dashboard: React.FC = () => {
     setAddedNewMeasurement(true);
   };
 
+  useEffect(() => {
+    batteries.forEach((battery, index) => {
+      const canvas = document.getElementById(
+        `powerChart${index}`
+      ) as HTMLCanvasElement;
+      const ctx = canvas?.getContext("2d");
+
+      // Check if a chart instance already exists on this canvas
+      if (ctx && Chart.getChart(ctx)) {
+        // Destroy the existing chart instance
+        Chart.getChart(ctx).destroy();
+      }
+
+      if (ctx) {
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Power Consumption", "Power Generation"],
+            datasets: [
+              {
+                label: "Power (kW)",
+                backgroundColor: ["#80ED99", "#38A3A5"],
+                data: [
+                  battery?.measurements[0]?.powerConsumption ?? 0,
+                  battery?.measurements[0]?.powerGeneration ?? 0,
+                ],
+                barThickness: 40, // Adjust the thickness of the bars
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            scales: {
+              x: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Power (kW)",
+                  font: {
+                    weight: "bold", // Make the title bold
+                  },
+                },
+                ticks: {
+                  font: {
+                    weight: "bold", // Make the tick labels bold
+                  },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false, // Hide the legend
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false, // Allow the chart to stretch to fit its container
+          },
+        });
+      }
+    });
+  }, [batteries]);
+
   return (
     <>
       <NavBar />
@@ -125,14 +187,21 @@ const Dashboard: React.FC = () => {
                   <h3>State of Charge</h3>
                   <div className="progress-bar">
                     <CircularProgressbar
-                      value={battery?.measurements[0]?.stateOfCharge ?? 0}
-                      text={`${battery?.measurements[0]?.stateOfCharge ?? 0}%`}
+                      value={parseFloat(
+                        (battery?.measurements[0]?.stateOfCharge ?? 0).toFixed(
+                          2
+                        )
+                      )}
+                      text={`${(
+                        battery?.measurements[0]?.stateOfCharge ?? 0
+                      ).toFixed(2)}%`}
                       className="progress-bar-state-of-charge"
-                      strokeWidth={10}
+                      strokeWidth={8}
                       styles={buildStyles({
                         textColor: "#333",
                         pathTransition: "none",
                         trailColor: "#eee",
+                        backgroundColor: "#b19cd9",
                       })}
                     />
                   </div>
@@ -161,14 +230,14 @@ const Dashboard: React.FC = () => {
                   <h3>Temperature</h3>
                   <div className="progress-bar">
                     <CircularProgressbar
-                      value={
-                        battery?.measurements[0]?.temperature.toFixed(2) ?? 0
-                      }
-                      text={`${
-                        battery?.measurements[0]?.temperature.toFixed(2) ?? 0
-                      }°C`}
+                      value={parseFloat(
+                        (battery?.measurements[0]?.temperature ?? 0).toFixed(2)
+                      )}
+                      text={`${parseFloat(
+                        (battery?.measurements[0]?.temperature ?? 0).toFixed(2)
+                      )}K`}
                       className="progress-bar-state-of-charge"
-                      strokeWidth={10}
+                      strokeWidth={8}
                       styles={buildStyles({
                         textColor: "#333",
                         pathTransition: "none",
@@ -241,7 +310,7 @@ const Dashboard: React.FC = () => {
                     <CircularProgressbar
                       value={battery?.measurements[0]?.stateOfHealth ?? 0}
                       text={`${battery?.measurements[0]?.stateOfHealth ?? 0}%`}
-                      className="progress-bar-temperature"
+                      className="progress-bar-soh"
                       strokeWidth={10}
                       styles={buildStyles({
                         textColor: "#333",
@@ -271,25 +340,18 @@ const Dashboard: React.FC = () => {
                   <p>The power generation is. the power consumption is.</p>
                 </div>
                 <h3>Power</h3>
-                <div className="metric">
-                  <h4>Power Consumption</h4>
-                  <p className="metric-value">
-                    {battery?.measurements[0]?.powerConsumption.toFixed(2) ?? 0}{" "}
-                    kW
-                  </p>
+                <div>
+                  <canvas
+                    id={`powerChart${index}`}
+                    width="1000"
+                    height="200"
+                  ></canvas>
                 </div>
-                <div className="metric">
-                  <h4>Power Generation</h4>
-                  <p className="metric-value">
-                    {battery?.measurements[0]?.powerGeneration.toFixed(2) ?? 0}{" "}
-                    kW
-                  </p>
-                </div>
-                {/* <h4>POWER STATE</h4> */}
                 <div className="efficiency-status">
                   <p>The system is operating efficiently</p>
                 </div>
               </div>
+
               <button
                 className="add-battery-button"
                 onClick={() => simulateMeasurements(battery.batteryId)}
@@ -298,6 +360,7 @@ const Dashboard: React.FC = () => {
               </button>
             </>
           ))}
+
           {isModalOpen && (
             <div className="modal-overlay">
               <div className="modal">
