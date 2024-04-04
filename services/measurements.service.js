@@ -1,4 +1,5 @@
 import firebase from "../firebase.js";
+import { getLoadsByUserId } from "./loads.service.js";
 const db = firebase.db;
 
 export async function addMeasurementByBatteryId(
@@ -50,19 +51,20 @@ const getRandom = (min, max, precision) => {
   return value.toFixed(precision) * 1;
 };
 
-export async function simulateData({
-  batteryId,
-  numberOfEntries = 1,
-  withLoad,
-  numberOfLoads = 1,
-}) {
+export async function simulateData({ batteryId, numberOfEntries = 1 }) {
+  const userId = "mv0QrbUwy9N7tCq0lyER";
+  const loads = await getLoadsByUserId(userId);
+
+  // console.log("-------loads", loadsResponse);
+  const totalPowerUsage = loads.reduce(
+    (accumulator, load) => accumulator + load.Powerusage,
+    0
+  );
+
+  const numberOfLoads = loads.length;
   const responses = [];
   for (let i = 0; i < numberOfEntries; i++) {
-    let variant = 0;
-
-    if (withLoad) {
-      variant = getRandom(0, 1, 2);
-    }
+    let variant = getRandom(0, 1, 2);
     let time = Date.now() - i * 60000;
     let current = getRandom(14, 15, 2) + numberOfLoads * variant;
     let voltageConsumption =
