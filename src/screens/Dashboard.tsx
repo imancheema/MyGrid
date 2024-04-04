@@ -159,11 +159,22 @@ const Dashboard: React.FC = () => {
         </p>
         <div>
           <button className="add-battery-button" onClick={openModal}>
+            <span className="plus-icon">
+              <i className="fas fa-plus" style={{ color: "white" }}></i>
+            </span>{" "}
             Add Battery
           </button>
           {batteries.map((battery: Battery, index: number) => (
             <>
-              <BatteryHeader battery={battery} />
+              <div className="button-container">
+                <BatteryHeader battery={battery} />
+                <button
+                  className="measurements-button"
+                  onClick={() => simulateMeasurements(battery.batteryId)}
+                >
+                  <i className="fas fa-sync"></i> Simulate Measurements
+                </button>
+              </div>
               <div className="card-container">
                 <div className="card">
                   <div
@@ -265,15 +276,15 @@ const Dashboard: React.FC = () => {
                   </div>
                   <h3>Charge Ratings</h3>
                   <div className="metric">
-                    <h4>Charge Rate</h4>
+                    <h4>• Charge Rate •</h4>
                     <p className="metric-value">
-                      {battery?.measurements[0]?.chargeRate.toFixed(2) ?? 0} kW
+                      {battery?.measurements[0]?.chargeRate.toFixed(2) ?? 0}kW
                     </p>
                   </div>
                   <div className="metric">
-                    <h4>Discharge Rate</h4>
+                    <h4>• Discharge Rate •</h4>
                     <p className="metric-value">
-                      {battery?.measurements[0]?.dischargeRate.toFixed(2) ?? 0}{" "}
+                      {battery?.measurements[0]?.dischargeRate.toFixed(2) ?? 0}
                       kW
                     </p>
                   </div>
@@ -307,7 +318,7 @@ const Dashboard: React.FC = () => {
                       value={battery?.measurements[0]?.stateOfHealth ?? 0}
                       text={`${battery?.measurements[0]?.stateOfHealth ?? 0}%`}
                       className="progress-bar-soh"
-                      strokeWidth={10}
+                      strokeWidth={9}
                       styles={buildStyles({
                         textColor: "#333",
                         pathTransition: "none",
@@ -335,12 +346,11 @@ const Dashboard: React.FC = () => {
                 >
                   <p>The power generation is. the power consumption is.</p>
                 </div>
-                <h3>Power</h3>
+                <h3>Power Metrics</h3>
                 <div>
                   <canvas
                     id={`powerChart${index}`}
-                    width="1000"
-                    height="200"
+                    style={{ maxWidth: "100%" }} // Adjust max-width and height as needed
                   ></canvas>
                 </div>
                 <div className="efficiency-status">
@@ -348,12 +358,12 @@ const Dashboard: React.FC = () => {
                 </div>
               </div>
 
-              <button
+              {/* <button
                 className="add-battery-button"
                 onClick={() => simulateMeasurements(battery.batteryId)}
               >
                 Simulate Measurements
-              </button>
+              </button> */}
             </>
           ))}
 
