@@ -3,4 +3,6 @@ export type Load = {
     Name: string;
     Type?: string;
     Powerusage?: number;
+    batteryId: string;
+    battery: object;
 }
