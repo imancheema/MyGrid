@@ -1,114 +1,112 @@
-body{
-    margin: 0;
-    background-color: #F1F1FA;
+body {
+  margin: 0;
 }
 
-.EnergyAnalysis .main{
-    margin-top: 2em;
-    margin-left: 5em;
-    margin-right: 5em;
+.EnergyAnalysis .main {
+  margin-top: 2em;
+  margin-left: 5em;
+  margin-right: 5em;
 }
 
-.EnergyAnalysis .PageHeader{
-    margin-left: 3.5em;
-    font-size: 36px;
-    font-weight: bold;
-
+.EnergyAnalysis .PageHeader {
+  margin-left: 3.5em;
+  font-size: 36px;
+  font-weight: bold;
 }
 
-.EnergyAnalysis .PageText{
-    margin-top: 1em;
-    margin-left: 6em;
-    font-size: 20px;
+.EnergyAnalysis .PageText {
+  margin-top: 1em;
+  margin-left: 6em;
+  font-size: 20px;
 }
 
-.EnergyAnalysis div.Container{
-    display: flex;
-    margin-top: 2em;
-    margin-left: 7em;
+.EnergyAnalysis div.Container {
+  display: flex;
+  margin-top: 2em;
+  margin-left: 7em;
 }
 
-.EnergyAnalysis div.Container div.Info{
-    width: 300px;
-    height: 375px;
-    background-color: white;
-    border-radius: 25px;
+.EnergyAnalysis div.Container div.Info {
+  width: 300px;
+  height: 375px;
+  background-color: white;
+  border-radius: 25px;
 }
 
-.EnergyAnalysis div.Container div.Info div.Header{
-    margin-top: 1em;
-    font-size: 28px;
-    width: auto;
-    text-align: center;
-    font-weight: bold;
+.EnergyAnalysis div.Container div.Info div.Header {
+  margin-top: 1em;
+  font-size: 28px;
+  width: auto;
+  text-align: center;
+  font-weight: bold;
 }
 
-.EnergyAnalysis div.Container div.Info div.Metric{
-    margin-top: 1.5em;
-    font-size: 16px;
-    margin-left: 2em;
-    font-weight: bold;
+.EnergyAnalysis div.Container div.Info div.Metric {
+  margin-top: 1.5em;
+  font-size: 16px;
+  margin-left: 2em;
+  font-weight: bold;
 }
 
-.EnergyAnalysis div.Container div.Info div.Value{
-    margin-top: 0.5em;
-    font-size: 36px;
-    margin-left: 3em;
-    font-weight: bold;
-    color: #57007B;
+.EnergyAnalysis div.Container div.Info div.Value {
+  margin-top: 0.5em;
+  font-size: 36px;
+  margin-left: 3em;
+  font-weight: bold;
+  color: #57007b;
 }
 
-.EnergyAnalysis div.Container div.Info div.Text{
-    margin-top: 1.5em;
-    font-size: 16px;
-    margin-left: 2em;
+.EnergyAnalysis div.Container div.Info div.Text {
+  margin-top: 1.5em;
+  font-size: 16px;
+  margin-left: 2em;
 }
 
-.EnergyAnalysis div.Container div.Battery{
-    width: 300px;
-    height: 375px;
-    border-radius: 25px;
-    margin-left: 5em;
-    margin-right: 5em;
+.EnergyAnalysis div.Container div.Battery {
+  width: 300px;
+  height: 375px;
+  border-radius: 25px;
+  margin-left: 5em;
+  margin-right: 5em;
 }
-.EnergyAnalysis div.Container div.Battery div.Lid{
-    width: 50px;
-    height: 20px;
-    margin-left: 125px;
-    background-color: black;
-}
-
-.EnergyAnalysis div.Container div.Battery div.Shape{
-    border-style: solid;
-    border-width: 3px;
-    border-radius: 10px;
-    height: 350px;
-}
-.EnergyAnalysis div.Container div.Battery div.Line{
-    margin: 5px 5px 5px 5px;
-    border-radius: 10px;
-    height: 64px;
-    width: 285px;
+.EnergyAnalysis div.Container div.Battery div.Lid {
+  width: 50px;
+  height: 20px;
+  margin-left: 125px;
+  background-color: black;
 }
 
-.EnergyAnalysis div.Container div.Battery div.Color5{
-    background-color: #D61D1D;
+.EnergyAnalysis div.Container div.Battery div.Shape {
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 10px;
+  height: 350px;
 }
-.EnergyAnalysis div.Container div.Battery div.Color4{
-    background-color: #F01E1E;
-}
-.EnergyAnalysis div.Container div.Battery div.Color3{
-    background-color: #FC8800;
-}
-.EnergyAnalysis div.Container div.Battery div.Color2{
-    background-color: #FFC42C;
-}
-.EnergyAnalysis div.Container div.Battery div.Color1{
-    background-color: #FCE200;
+.EnergyAnalysis div.Container div.Battery div.Line {
+  margin: 5px 5px 5px 5px;
+  border-radius: 10px;
+  height: 64px;
+  width: 285px;
 }
 
-.EnergyAnalysis div.EndText{
-    font-size: 28px;
-    margin-top: 2em;
-    margin-left: 10em;
+.EnergyAnalysis div.Container div.Battery div.Color5 {
+  background-color: #d61d1d;
+}
+.EnergyAnalysis div.Container div.Battery div.Color4 {
+  background-color: #f01e1e;
+}
+.EnergyAnalysis div.Container div.Battery div.Color3 {
+  background-color: #fc8800;
+}
+.EnergyAnalysis div.Container div.Battery div.Color2 {
+  background-color: #ffc42c;
+}
+.EnergyAnalysis div.Container div.Battery div.Color1 {
+  background-color: #fce200;
+}
+
+.EnergyAnalysis div.EndText {
+  font-size: 28px;
+  margin-top: 2em;
+  margin-left: 10em;
 }

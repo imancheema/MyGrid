@@ -1,3 +1,4 @@
+import { orderBy } from "firebase/firestore/lite";
 import firebase from "../firebase.js";
 
 const db = firebase.db;
@@ -5,7 +6,79 @@ const db = firebase.db;
 export async function getBatteries() {
   const batteriesCollection = firebase.collection(db, "batteries");
   const batteriesSnapshot = await firebase.getDocs(batteriesCollection);
-  const batteries = batteriesSnapshot.docs.map((doc) => doc.data());
+  const batteries = batteriesSnapshot.docs.map(async (doc) => {
+    const battery = doc.data();
+    const batteryRef = firebase.doc(db, "batteries", battery.batteryId);
+    // Get measurements for each battery
+    const measurementsCollection = firebase.collection(db, "measurements");
+    const measurementsQuery = firebase.query(
+      measurementsCollection,
+      firebase.where("batteryId", "==", batteryRef), // Assuming batteryId is the field that connects measurements to batteries
+      orderBy("timestamp", "desc")
+    );
+    const measurementsSnapshot = await firebase.getDocs(measurementsQuery);
+    const measurements = measurementsSnapshot.docs.map((doc) => doc.data());
+    battery.measurements = measurements;
+    return battery;
+  });
+
+  return Promise.all(batteries);
+}
+
+export async function getBatteriesOld() {
+  // Get batteries
+  const batteriesCollection = firebase.collection(db, "batteries");
+  const batteriesSnapshot = await firebase.getDocs(batteriesCollection);
+  const batteries = batteriesSnapshot.docs.map((doc) => {
+    const battery = doc.data();
+    const batteryRef = firebase.doc(db, "batteries", battery.batteryId);
+    // Get measurements for each battery
+    const measurementsCollection = firebase.collection(db, "measurements");
+    const measurementsQuery = firebase.query(
+      measurementsCollection,
+      firebase.where("batteryId", "==", batteryRef),
+      orderBy("timestamp", "desc")
+    );
+    // const measurementsSnapshot = await firebase.getDocs(measurementsQuery);
+    // const measurements = measurementsSnapshot.docs.map((doc) => doc.data());
+    firebase.getDocs(measurementsQuery).then((measurementsSnapshot) => {
+      const measurements = measurementsSnapshot.docs.map((doc) => {
+        return doc.data();
+      });
+      battery.measurements = measurements;
+      return battery;
+
+      //   const measurementsCollection = firebase.collection(db, "measurements");
+      //   const batteryRef = firebase.doc(db, "batteries", doc.data().batteryId);
+      //   const querySnapshot = await firebase.getDocs(
+      //     firebase.query(
+      //       measurementsCollection,
+      //       firebase.where("batteryId", "==", batteryRef),
+      //       orderBy("timestamp", "desc")
+      //     )
+      //   );
+      //   console.log("---CHECK", querySnapshot);
+      //   console.log("Query Snapshot:", querySnapshot.docs.length);
+      //   const measurements = querySnapshot.docs.map((doc) => {
+      //     const data = doc.data();
+      //     return {
+      //       id: doc.id,
+      //       capacitance: data.capacitance || null,
+      //       current: data.current || null,
+      //       energyConsumption: data.energyConsumption || null,
+      //       energyGeneration: data.energyGeneration || null,
+      //       stateOfCharge: data.stateOfCharge || null,
+      //       stateOfHealth: data.stateOfHealth || null,
+      //       temperature: data.temperature || null,
+      //       timestamp: data.timestamp || null,
+      //       voltage: data.voltage || null,
+      //     };
+      //   });
+
+      //   console.log("---MEASUREMETN", measurements);
+    });
+    return battery;
+  });
   return batteries;
 }
 
@@ -24,10 +97,6 @@ export async function getBatteryById(batteryId) {
 
 export async function createBattery(batteryData) {
   try {
-    console.log("Creating battery with data:", batteryData);
-
-    //TODO: check if battery has the same name
-
     const batteriesCollection = firebase.collection(db, "batteries");
     const batteryRef = firebase.doc(batteriesCollection);
     await firebase.setDoc(batteryRef, {
@@ -71,7 +140,8 @@ export async function getMeasurementsByBatteryId(batteryId) {
     const querySnapshot = await firebase.getDocs(
       firebase.query(
         measurementsCollection,
-        firebase.where("batteryId", "==", batteryRef)
+        firebase.where("batteryId", "==", batteryRef),
+        orderBy("timestamp", "desc")
       )
     );
     console.log("Query Snapshot:", querySnapshot.docs.length);
@@ -80,9 +150,11 @@ export async function getMeasurementsByBatteryId(batteryId) {
       return {
         id: doc.id,
         capacitance: data.capacitance || null,
+        chargeRate: data.chargeRate || null,
         current: data.current || null,
-        energyConsumption: data.energyConsumption || null,
-        energyGeneration: data.energyGeneration || null,
+        dischargeRate: data.dischargeRate || null,
+        powerConsumption: data.energyConsumption || null,
+        powerGeneration: data.energyGeneration || null,
         stateOfCharge: data.stateOfCharge || null,
         stateOfHealth: data.stateOfHealth || null,
         temperature: data.temperature || null,

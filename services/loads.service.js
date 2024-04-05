@@ -33,13 +33,17 @@ export async function getLoadsByUserId(UserId) {
 export async function createLoad(LoadData, UserId) {
   try {
     //TODO: check if loads has the same name
+    const { Name, Type, Powerusage, batteryId } = LoadData;
     const loadCollection = firebase.collection(db, "loads");
     const userRef = firebase.doc(db, "users", UserId);
+    const batteryRef = firebase.doc(db, "batteries", batteryId);
     const newLoadRef = await firebase.addDoc(loadCollection, {
-      Name: LoadData.Name,
-      Type: LoadData.Type,
-      Powerusage: LoadData.Powerusage,
+      Name,
+      Type,
+      Powerusage,
       UserID: userRef,
+      battery: batteryRef,
+      batteryId: batteryId,
     });
     return newLoadRef.id;
   } catch (error) {
@@ -51,7 +55,12 @@ export async function createLoad(LoadData, UserId) {
 export async function updateLoad(UserId, updatedData) {
   try {
     const loadRef = firebase.doc(db, "loads", UserId);
-    await firebase.updateDoc(loadRef, updatedData);
+    const batteryRef = firebase.doc(db, "batteries", updatedData.batteryId);
+    await firebase.updateDoc(loadRef, {
+      ...updatedData,
+      battery: batteryRef,
+      batteryId: updatedData.batteryId,
+    });
     return "Load updated successfully";
   } catch (error) {
     throw new Error("Failed to update load: " + error.message);

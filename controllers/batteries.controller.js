@@ -9,6 +9,7 @@ import {
   deleteBattery,
   getMeasurementsByBatteryId,
 } from "../services/batteries.service.js";
+import { simulateData } from "../services/measurements.service.js";
 
 // get all batteries
 router.get("/", async (req, res) => {
@@ -114,7 +115,7 @@ router.delete("/:batteryId", async (req, res) => {
 // get measurements by batteryId
 router.get("/:batteryId/measurements", async (req, res) => {
   try {
-    const batteryId = req.params.id;
+    const batteryId = req.params.batteryId;
     const measurements = await getMeasurementsByBatteryId(batteryId);
     res.status(200).send({
       status: "Success",
@@ -128,7 +129,15 @@ router.get("/:batteryId/measurements", async (req, res) => {
   }
 });
 
+router.post("/:batteryId/simulate", async (req, res) => {
+  try {
+    const { batteryId } = req.params;
+    const { numberOfEntries, withLoad, numberOfLoads } = req?.body;
+    await simulateData({ batteryId, numberOfEntries, withLoad, numberOfLoads });
+  } catch (error) {
+    console.log("---error", error);
+  }
+});
 // get measurements by batteryId and time
 
-// module.exports = router;
 export default router;

@@ -1,4 +1,6 @@
+import logo from "../assets/Logo.png";
 import "./NavBar.css";
+
 const NavBar = () => {
   var x = 0;
   const SideNav = () => {
@@ -13,7 +15,9 @@ const NavBar = () => {
   return (
     <body className="NavBody">
       <div className="header">
-        <div className="left-header">Logo</div>
+        <div className="left-header">
+          <img src={logo} alt="Logo" />
+        </div>
         <div className="right-header">
           <input
             type="image"
