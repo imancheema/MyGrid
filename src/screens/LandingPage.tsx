@@ -1,15 +1,33 @@
+import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import LandingPageNavbar from "../components/LandingPageNavbar";
 
 const LandingPage = () => {
+  const images = [
+    "src/assets/LandingImg.jpg",
+    "src/assets/LandingImage2.jpg",
+    "src/assets/LandingImage4.jpg",
+  ];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 4000); // Change image every 4 seconds
+    return () => clearInterval(interval); // Cleanup interval on unmount
+  }, [images.length]);
+
   return (
     <div>
       <LandingPageNavbar />
       <div className="landing-image">
-        <img
-          src="src/assets/LandingImg.jpg"
-          alt="Landing Page Energy Storage Image"
-        />
+        <div className="landing-image">
+          <img
+            src={images[currentImageIndex]}
+            alt="Landing Page Energy Storage Image"
+          />
+          <div className="image-text">Leading the way to a greener future.</div>
+        </div>
       </div>
       <div className="how-it-works-text">
         <h2>How it works?</h2>
@@ -82,7 +100,9 @@ const LandingPage = () => {
           </p>
         </div>
       </div>
-      <footer className="footer"></footer>
+      <footer className="footer">
+        <p>Copyright © [2024] Your Company Name. All rights reserved.</p>
+      </footer>
     </div>
   );
 };

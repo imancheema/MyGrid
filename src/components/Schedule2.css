@@ -1,13 +1,9 @@
-
 body.Body div.Mainbody {
-    display: flex;
-}
-h2 {
-  margin: 0;
-  font-size: 16px;
+  display: flex;
 }
 
-b { /* used for event dates/times */
+b {
+  /* used for event dates/times */
   margin-right: 3px;
 }
 
@@ -40,7 +36,7 @@ b { /* used for event dates/times */
   border-right: 1px;
 }
 
-.Schedule-sidebar-section div.fc-event{
+.Schedule-sidebar-section div.fc-event {
   margin-top: 5px;
   text-align: center;
   width: 100px;
@@ -51,7 +47,7 @@ b { /* used for event dates/times */
   user-select: none;
 }
 
-.Schedule-sidebar button.recur{
+.Schedule-sidebar button.recur {
   margin-left: 10px;
   font-size: 14px;
   height: 30px;
@@ -59,26 +55,26 @@ b { /* used for event dates/times */
   background-color: bisque;
 }
 
-.Schedule-sidebar button.recur:hover{
+.Schedule-sidebar button.recur:hover {
   cursor: pointer;
 }
 
-.Schedule-sidebar dialog.modal{
+.Schedule-sidebar dialog.modal {
   max-width: 800px;
   min-width: 500px;
   background-color: rgb(161, 196, 227);
 }
 
-.Schedule-sidebar dialog.modal span.Title{
+.Schedule-sidebar dialog.modal span.Title {
   padding-left: 18em;
   padding-right: 18em;
   border-style: solid;
   border-radius: 1px;
   font-size: 16px;
-  background-color: white;;
+  background-color: white;
 }
 
-.Schedule-sidebar dialog.modal button.exit{
+.Schedule-sidebar dialog.modal button.exit {
   font-size: 16px;
   font-weight: bold;
   background-color: none;
@@ -87,11 +83,11 @@ b { /* used for event dates/times */
   width: 2.5em;
 }
 
-.Schedule-sidebar dialog.modal button.exit:hover{
-  cursor:pointer;
+.Schedule-sidebar dialog.modal button.exit:hover {
+  cursor: pointer;
 }
 
-.Schedule-sidebar dialog.modal div.info{
+.Schedule-sidebar dialog.modal div.info {
   background-color: white;
   margin-top: 1em;
   border-style: solid;
@@ -100,72 +96,80 @@ b { /* used for event dates/times */
   height: 300px;
 }
 
-.Schedule-sidebar dialog.modal div.info div.q1,div.q2,div.q3, div.q4, div.q5{
+.Schedule-sidebar dialog.modal div.info div.q1,
+div.q2,
+div.q3,
+div.q4,
+div.q5 {
   margin-top: 0.5em;
   margin-left: 9em;
-  font-size:16px;
+  font-size: 16px;
 }
 
-.Schedule-sidebar dialog.modal div.msg{
-    width: 100%;
-    margin-top: 0.5em;
-    text-align: center;
-    font-size:16px;
+.Schedule-sidebar dialog.modal div.msg {
+  width: 100%;
+  margin-top: 0.5em;
+  text-align: center;
+  font-size: 16px;
 }
-.Schedule-sidebar dialog.modal div.info select.loads,input.input2,input.input3{
-  position : absolute;
+.Schedule-sidebar dialog.modal div.info select.loads,
+input.input2,
+input.input3 {
+  position: absolute;
   right: 150px;
   font-size: 16px;
 }
 
-.Schedule-sidebar dialog.modal div.info select.loads{
+.Schedule-sidebar dialog.modal div.info select.loads {
   width: 125px;
   text-align: center;
 }
 
-.Schedule-sidebar dialog.modal div.info input.input2, input.input3{
+.Schedule-sidebar dialog.modal div.info input.input2,
+input.input3 {
   text-align: center;
   width: 120px;
 }
 
-.Schedule-sidebar dialog.modal div.info div.day{
+.Schedule-sidebar dialog.modal div.info div.day {
   margin-left: 10em;
 }
 
-.Schedule-sidebar dialog.modal div.info div.day label{
-  margin-left:3em;
+.Schedule-sidebar dialog.modal div.info div.day label {
+  margin-left: 3em;
 }
 
-.Schedule-sidebar dialog.modal div.info div.day input{
+.Schedule-sidebar dialog.modal div.info div.day input {
   margin-left: 3.75em;
 }
 
-.Schedule-sidebar dialog.modal div.info label.weekly{
+.Schedule-sidebar dialog.modal div.info label.weekly {
   margin-left: 22em;
 }
 
-.Schedule-sidebar dialog.modal div.info label.monthly{
+.Schedule-sidebar dialog.modal div.info label.monthly {
   margin-left: 2em;
 }
 
-.Schedule-sidebar dialog.modal div.info button.AddNewEvent{
+.Schedule-sidebar dialog.modal div.info button.AddNewEvent {
   margin-left: 22em;
   margin-top: 0.5em;
   height: 2em;
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   border-radius: 12px;
   border: none;
 }
 
-.Schedule-sidebar dialog.modal div.info button.AddNewEvent:hover{
-  cursor:pointer;
+.Schedule-sidebar dialog.modal div.info button.AddNewEvent:hover {
+  cursor: pointer;
 }
 .Calendar {
   flex-grow: 1;
   padding-right: 15em;
 }
 
-.fc { /* the calendar root */
+.fc {
+  /* the calendar root */
   max-width: 1100px;
   margin: 0 auto;
 }
