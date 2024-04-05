@@ -103,12 +103,12 @@ const Dashboard: React.FC = () => {
             datasets: [
               {
                 label: "Power (kW)",
-                backgroundColor: ["#80ED99", "#38A3A5"],
+                backgroundColor: ["#52eb97", "#a4eb52"],
                 data: [
                   battery?.measurements[0]?.powerConsumption ?? 0,
                   battery?.measurements[0]?.powerGeneration ?? 0,
                 ],
-                barThickness: 40, // Adjust the thickness of the bars
+                barThickness: 30, // Adjust the thickness of the bars
               },
             ],
           },
@@ -151,11 +151,11 @@ const Dashboard: React.FC = () => {
       <div className="dashboard">
         <h1>Battery Dashboard</h1>
         {/* <h2>Hi, Name!</h2> */}
-        <p>
+        <p className="dashboard-text">
           Welcome to the Dashboard, the central hub for your energy journey. In
           real-time, monitor critical metrics such as State of Charge (SoC),
-          temperature, and power dynamics to gain a comprehensive analysis of
-          your battery storage system.
+          State of Health (SoC), temperature, charge ratings, and power dynamics
+          to gain a comprehensive analysis of your battery storage system.
         </p>
         <div>
           <button className="add-battery-button" onClick={openModal}>
@@ -350,7 +350,7 @@ const Dashboard: React.FC = () => {
                 <div>
                   <canvas
                     id={`powerChart${index}`}
-                    style={{ maxWidth: "100%" }} // Adjust max-width and height as needed
+                    style={{ width: "750px", height: "150px" }} // Adjust the height as needed
                   ></canvas>
                 </div>
                 <div className="efficiency-status">
