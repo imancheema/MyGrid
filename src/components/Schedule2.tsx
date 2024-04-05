@@ -13,7 +13,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { createEventId, initialize_initial_events} from './event-utils';
-import { getLoadsByUserID } from "../frontend-services/loads.services";
+import { getLoadsByUserID, createLoad } from "../frontend-services/loads.services";
 import { createSchedule, deleteSchedule, getScheduleByLoadID } from "../frontend-services/schedule.services";
 import { Schedule } from "../models/schedule";
 import { Load } from "../models/loads";
@@ -62,6 +62,7 @@ import { Load } from "../models/loads";
           StartRecur: schedule.StartRecur,
           EndRecur: schedule.EndRecur,
           Start: schedule.StartTime,
+          loadConsumption: loads.filter(((load: Load) => load.Id === schedule.loadID._key.path.segments[6]))[0].Powerusage,
           Title: loads.filter(((load: Load) => load.Id === schedule.loadID._key.path.segments[6]))[0].Name
         }))
 
@@ -135,7 +136,7 @@ import { Load } from "../models/loads";
                   <div id='Container' className='Schedule-sidebar-section'>
                   </div>
                   <button className='recur' id='recur' onClick={() => (document.getElementById('modal') as HTMLDialogElement).showModal()}>Add Recurring Event</button>
-                  <button className='recur' id='changes'>Submit Changes</button>
+                  <button className='recur' id='changes' onClick={() => optimizeBattery(this.state.scheduleData)}>Optimize Calendar</button>
                   <dialog id="modal" className="modal">
                       <span className = "Title">Add a Recurring Event</span>
                       <button className="exit" id ="closemodal" onClick={() => (document.getElementById('modal') as HTMLDialogElement).close()}>X</button>
@@ -229,15 +230,7 @@ import { Load } from "../models/loads";
           }
 
           handleEventChange = (eventArg: EventChangeArg) => {
-            const event = eventArg.event;
-            const newProperties = {
-              id: event.id,
-              groupid: event.groupId,
-              startTime: event.start,
-              endTime: event.end,
-              startRecur: event.startStr,
-              endRecur: event.endStr,
-            }
+
           }
     };
 
@@ -265,6 +258,7 @@ import { Load } from "../models/loads";
         EndRecur: endday,
         Dayofweek: daysOfWeek,
         Title: "",
+        loadConsumption: 0,
         Repeat: true,
       };
 
@@ -287,10 +281,85 @@ import { Load } from "../models/loads";
         "Please consider using this load during low or mid peak hours (7pm - 7am) or (11am - 5pm) on weekdays";
       }
     }
+
+    const optimizeBattery = (Loadschedule: Schedule[]) => {
+        let capacity = 500; //grab from database capacitance
+        let batchargespeed = 5; //grab from database energyGeneration
+        let loadusetimes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //Measures how much electricity was used by a load at that hour
+        //Where loadusetimes[0] == 00:00, loadusetimes[1] = 01:00, etc
+
+        //Create a new load of type charge battery
+        const loaddata: Load = {
+          Id: userId,
+          Name: "Optimized Charge",
+          Type: "Charge Battery",
+          Powerusage: 0,
+        }
+        //createLoad(loaddata,userId);
+
+        //Grab today's date and tomorrow's date
+        let datdate = new Date()
+        let dateTime = new Date().toISOString()
+        datdate.setDate(datdate.getDate() + 1)
+        let tomorrowTime = datdate.toISOString()
+        let today = dateTime.split("T")[0]
+        let tomorrow = tomorrowTime.split("T")[0]
+        
+        let tomorrowDate = datdate.toDateString().split(' ')[0]
+
+        //Check tomorrow's day
+        let day = -1
+        if (tomorrowDate == "Sat"){
+            day = 6
+        }else if (tomorrowDate =="Sun"){
+            day = 0
+        }else if (tomorrowDate =="Mon"){
+            day = 1
+        }else if (tomorrowDate =="Tue"){
+            day = 2
+        }else if (tomorrowDate =="Wed"){
+            day = 3
+        }else if (tomorrowDate =="Thu"){
+            day = 4
+        }else if (tomorrowDate =="Fri"){
+            day = 5
+        }
+
+        //Loop through schedule and find every schedule which is running tomorrow
+        Loadschedule.forEach((schedule) => {
+          if ((schedule.StartRecur <= today ) && (schedule.EndRecur >= tomorrow) && (schedule.Dayofweek[day])){
+            let hour = schedule.Start.split(":")[0]
+            let min = schedule.Start.split(":")[1]  
+            let endhour = schedule.End.split(":")[0]
+            let endminute = schedule.End.split(":")[1]
+
+            //Adjustments for first hour (if start not rounded to a xx:00)
+            let difference = 60 - parseInt(min)
+            loadusetimes[parseInt(hour)] = difference/60 * schedule.loadConsumption
+            hour = (parseInt(hour) + 1).toString()
+
+            //Until we reach the last hour
+            while (parseInt(hour) < parseInt(endhour)){
+              loadusetimes[parseInt(hour)] = schedule.loadConsumption
+              hour = (parseInt(hour) + 1).toString()
+            }
+
+            //Adjustments for last hour (if end not rounded to a xx:00)
+            difference = parseInt(endminute)
+            loadusetimes[parseInt(hour)] = difference/60 * schedule.loadConsumption
+          
+            //Display the values of the array
+            console.log(loadusetimes)
+
+          }
+        })
+
+        //Maria's algorithm here
+    }
+
     function renderEventContent(eventContent: EventContentArg) {
         return (
           <>
-            <b>{eventContent.timeText}</b>
             <i>{eventContent.event.title}</i>
           </>
         )
