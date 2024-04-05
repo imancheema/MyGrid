@@ -89,9 +89,7 @@ const Dashboard: React.FC = () => {
       ) as HTMLCanvasElement;
       const ctx = canvas?.getContext("2d");
 
-      // Check if a chart instance already exists on this canvas
       if (ctx && Chart.getChart(ctx)) {
-        // Destroy the existing chart instance
         Chart.getChart(ctx).destroy();
       }
 
@@ -108,7 +106,7 @@ const Dashboard: React.FC = () => {
                   battery?.measurements[0]?.powerConsumption ?? 0,
                   battery?.measurements[0]?.powerGeneration ?? 0,
                 ],
-                barThickness: 30, // Adjust the thickness of the bars
+                barThickness: 30,
               },
             ],
           },
@@ -121,23 +119,33 @@ const Dashboard: React.FC = () => {
                   display: true,
                   text: "Power (kW)",
                   font: {
-                    weight: "bold", // Make the title bold
+                    family: "'Jost', sans-serif",
+                    weight: "bold",
                   },
                 },
                 ticks: {
                   font: {
-                    weight: "bold", // Make the tick labels bold
+                    family: "'Jost', sans-serif",
+                    weight: "bold",
+                  },
+                },
+              },
+              y: {
+                ticks: {
+                  font: {
+                    family: "'Jost', sans-serif",
+                    weight: "bold",
                   },
                 },
               },
             },
             plugins: {
               legend: {
-                display: false, // Hide the legend
+                display: false,
               },
             },
             responsive: true,
-            maintainAspectRatio: false, // Allow the chart to stretch to fit its container
+            maintainAspectRatio: false,
           },
         });
       }
@@ -350,20 +358,13 @@ const Dashboard: React.FC = () => {
                 <div>
                   <canvas
                     id={`powerChart${index}`}
-                    style={{ width: "750px", height: "150px" }} // Adjust the height as needed
+                    style={{ width: "750px", height: "150px" }}
                   ></canvas>
                 </div>
                 <div className="efficiency-status">
                   <p>The system is operating efficiently</p>
                 </div>
               </div>
-
-              {/* <button
-                className="add-battery-button"
-                onClick={() => simulateMeasurements(battery.batteryId)}
-              >
-                Simulate Measurements
-              </button> */}
             </>
           ))}
 
