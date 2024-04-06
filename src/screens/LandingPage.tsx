@@ -101,7 +101,7 @@ const LandingPage = () => {
         </div>
       </div>
       <footer className="footer">
-        <p>Copyright © [2024] Your Company Name. All rights reserved.</p>
+        <p>Copyright © [2024] MyGrid+. All rights reserved.</p>
       </footer>
     </div>
   );
