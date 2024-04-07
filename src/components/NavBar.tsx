@@ -35,16 +35,17 @@ const NavBar = () => {
           ></img>
         </a>
         <a href="/dashboard">My Dashboard</a>
-        <a href="/EnergyAnalysis">Energy Analysis</a>
+        {/* <a href="/EnergyAnalysis">Energy Analysis</a> */}
         <a href="/load-management">Load Management</a>
         <a href="/schedule">Schedule</a>
         <a href="/profile">Profile</a>
-        <a href="/" className="exitbtn" onClick={SideNav}>
+        <a href="/">Logout</a>
+        {/* <a href="/" className="exitbtn" onClick={SideNav}>
           <img
             src="src/assets/Exit.png"
             style={{ width: "1em", height: "1em" }}
           ></img>
-        </a>
+        </a> */}
       </div>
     </body>
   );
