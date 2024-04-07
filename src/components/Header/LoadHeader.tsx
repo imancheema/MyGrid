@@ -17,7 +17,7 @@ const LoadHeader = ({ load, setOpenModal }: ILoadHeader) => {
         {load.Name}
       </div>
       <div className="Load-Value" id="Load-Value">
-        {load.Powerusage}kWh
+        {load.Powerusage}W
       </div>
       <div className="Load-Battery" id="Load-Battery"></div>
       <div>
