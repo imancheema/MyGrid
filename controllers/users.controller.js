@@ -58,11 +58,11 @@ router.get("/:userEmail", async(req, res) => {
     if (!userEmail) {
       throw new Error("Email is a required param");
     }
-    const email = await getUserByEmail(userEmail); //Create this method in user.services
+    const user = await getUserByEmail(userEmail); //Create this method in user.services
 
     res.status(200).send({
       status: "Success",
-      email,
+      user,
     });
   } catch (error) {
     res.status(404).send({
@@ -73,9 +73,9 @@ router.get("/:userEmail", async(req, res) => {
 });
 
 //edit user
-router.put("/:userEmail", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    const userEmail = req.params.userEmail;
+    const userID = req.params.id;
     const {email, password, firstName, lastName, phoneNum, city, postalCode} = req.body;
     const updatedData = {
       email,
@@ -86,7 +86,7 @@ router.put("/:userEmail", async (req, res) => {
       city,
       postalCode,
     };
-    const resultMessage = await updateUser(userEmail, updatedData);
+    const resultMessage = await updateUser(userID, updatedData);
     res.status(200).send({
       status: "Success",
       message: resultMessage,

@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth"
 import {
   getFirestore,
   collection,
@@ -14,7 +15,7 @@ import {
 } from "firebase/firestore/lite";
 
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: "AIzaSyCq46pXc4XJiPLrSIfp_U-mmXoagxWIlZ0",
   authDomain: "battery-storage-optimization.firebaseapp.com",
   projectId: "battery-storage-optimization",
   storageBucket: "battery-storage-optimization.appspot.com",
@@ -26,9 +27,11 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+export const auth = getAuth(app);
 
 const firebase = {
   db,
+  auth,
   getFirestore,
   collection,
   getDocs,
