@@ -174,6 +174,10 @@ const Dashboard: React.FC = () => {
           </button>
           {batteries.map((battery: Battery, index: number) => (
             <>
+              {console.log(
+                "------",
+                typeof battery?.measurements[0]?.chargeRate
+              )}
               <div className="button-container">
                 <BatteryHeader battery={battery} />
                 <button
@@ -286,13 +290,13 @@ const Dashboard: React.FC = () => {
                   <div className="metric">
                     <h4>• Charge Rate •</h4>
                     <p className="metric-value">
-                      {battery?.measurements[0]?.chargeRate.toFixed(2) ?? 0}kW
+                      {battery?.measurements[0]?.chargeRate ?? 0}kW
                     </p>
                   </div>
                   <div className="metric">
                     <h4>• Discharge Rate •</h4>
                     <p className="metric-value">
-                      {battery?.measurements[0]?.dischargeRate.toFixed(2) ?? 0}
+                      {battery?.measurements[0]?.dischargeRate ?? 0}
                       kW
                     </p>
                   </div>
