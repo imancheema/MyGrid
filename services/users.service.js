@@ -15,7 +15,8 @@ export async function createUser(userData){
   try {
     console.log("Creating user with data:", userData);
     const usersCollection = firebase.collection(db, "users");
-    const newUserRef = await firebase.addDoc(usersCollection, {
+    const newUserRef = firebase.doc(usersCollection);
+    await firebase.setDoc(newUserRef, {
       email: userData.email,
       password: userData.password,
       firstName: userData.firstName,
@@ -23,6 +24,7 @@ export async function createUser(userData){
       phoneNum: userData.phoneNum,
       city: userData.city,
       postalCode: userData.postalCode,
+      userID: newUserRef.id,
     });
     return newUserRef.id;
   } catch (error) {
@@ -33,20 +35,21 @@ export async function createUser(userData){
 
 export async function getUserByEmail(userEmail){
   try{
-    const userReference = firebase.doc(db, "users", userEmail);
-    const userSnapshot = await firebase.getDoc(userReference);
-    if (!userSnapshot.exists()) {
+    const userCollection = firebase.collection(db, "users");
+    const userSnapshot = await firebase.getDocs(userCollection);
+    const user = userSnapshot.docs.map((doc) => ({...doc.data(), id:doc.id})).filter((user)=> user.email === userEmail)
+    if (!user.length) {
       throw new Error("User not found");
     }
-    return { id: userSnapshot.id, ...userSnapshot.data() };
+    return user;
   } catch (error) {
     throw new Error("Failed to get user: " + error.message);
   }
 }
 
-export async function updateUser(userEmail, updatedData){
+export async function updateUser(userID, updatedData){
   try {
-    const userRef = firebase.doc(db, "batteries", userEmail);
+    const userRef = firebase.doc(db, "users", userID);
     await firebase.updateDoc(userRef, updatedData);
     return "User Info updated sucessfully";
   } catch (error) {

@@ -17,7 +17,11 @@ const LoadHeader = ({ load, setOpenModal }: ILoadHeader) => {
         {load.Name}
       </div>
       <div className="Load-Value" id="Load-Value">
+<<<<<<< HEAD
         {load.Powerusage}W/hr
+=======
+        {load.Powerusage}W
+>>>>>>> origin/main
       </div>
       <div className="Load-Battery" id="Load-Battery"></div>
       <div>

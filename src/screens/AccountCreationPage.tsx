@@ -1,10 +1,10 @@
 import "./SimplePages.css";
 import React, {useState} from "react";
-
+import { UserCredential, createUserWithEmailAndPassword, sendEmailVerification} from "firebase/auth";
 import {
   createUser
 } from "../frontend-services/accountCreation.service.ts";
-
+import firebase from "../../firebase.js";
 
 //TODO Validation for proper email, phone number, postal code
 
@@ -20,6 +20,11 @@ const LoginPage = () => {
     postalCode: "",
   });
 
+  const [emailErr, setEmailErr] = useState(true)
+  const [weakPassErr, setWeakPassErr] = useState(true)
+  const [invPassErr, setInvPassErr] = useState(true)
+  
+
   const addUser = async () => {
     try {
       await createUser(userInfo);
@@ -29,14 +34,32 @@ const LoginPage = () => {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    const auth = firebase.auth;
     e.preventDefault();
+    
+    setEmailErr(true)
+    setWeakPassErr(true)
+    setInvPassErr(true)
+
     if (userInfo.password === userInfo.confirmPassword){
-      console.log("Testing");
-      addUser();
+      try {
+      const newUserCredential: UserCredential = await createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+      await sendEmailVerification(newUserCredential.user);
+      await addUser();
+      window.location.href = "http://localhost:5173/Login";
+      } catch (error) {
+        if (error.code === "auth/invalid-email" || error.code === "auth/email-already-exists"){
+          setEmailErr(false);
+        }
+        if (error.code === "auth/weak-password" || error.code === "auth/missing-password"){
+          setWeakPassErr(false)
+        }
+        console.log(error);
+      }
     }
     else {
-      console.log("Password and confirm password do not match");
+      setInvPassErr(false);
     }
   }
   
@@ -83,7 +106,9 @@ const LoginPage = () => {
             <br/>
             <input className="info-input" type="text" id="postalCode" name="postalCode" value={userInfo.postalCode} onChange={(e) => setUserInfo({...userInfo, postalCode: e.target.value})}></input>
             <br/>
-            <div className="invalid-text"></div>
+            <div hidden={emailErr} className="invalid-text" id="invalid-email">Please enter a valid email</div>
+            <div hidden={weakPassErr} className="invalid-text" id="weak-password">Please enter a password longer than 6 characters</div>
+            <div hidden={invPassErr} className="invalid-text" id="invalid-password">Passwords do not match</div>
             <br/>
             <a> 
               <button type="submit" className="account-button">Register Now</button>

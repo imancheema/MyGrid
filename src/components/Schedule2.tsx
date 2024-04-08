@@ -289,12 +289,12 @@ import { Load } from "../models/loads";
         //Where loadusetimes[0] == 00:00, loadusetimes[1] = 01:00, etc
 
         //Create a new load of type charge battery
-        const loaddata: Load = {
-          Id: userId,
-          Name: "Optimized Charge",
-          Type: "Charge Battery",
-          Powerusage: 0,
-        }
+        // const loaddata: Load = {
+        //   Id: userId,
+        //   Name: "Optimized Charge",
+        //   Type: "Charge Battery",
+        //   Powerusage: 0,
+        // }
         //createLoad(loaddata,userId);
 
         //Grab today's date and tomorrow's date

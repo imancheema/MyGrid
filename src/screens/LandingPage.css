@@ -17,13 +17,32 @@ h2 {
   width: 100%;
   height: 75vh;
   overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
 }
 
 .landing-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.9;
+  opacity: 0.5;
+  transition: transform 0.5s ease-in-out; /* Simple transition */
+}
+
+.landing-image img:hover {
+  opacity: 1; /* Fully visible on hover */
+}
+
+.landing-image .image-text {
+  font-family: "Inter", sans-serif;
+  position: absolute;
+  top: 3.5em; /* Adjust as needed */
+  left: 1.5em; /* Adjust as needed */
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(97, 97, 97, 0.2); /* Add shadow for better visibility */
+  max-width: 12em;
+  letter-spacing: 9px;
 }
 
 /* How it Works */
@@ -85,6 +104,12 @@ h2 {
 .footer {
   background-color: var(--primary-color);
   padding: 30px 0;
+}
+
+.footer {
+  color: white; /* White font color */
+  text-align: center; /* Center align text */
+  font-family: "Jost", sans-serif; /* Use Inter font */
 }
 
 @media (max-width: 768px) {

@@ -82,6 +82,76 @@ const Dashboard: React.FC = () => {
     setAddedNewMeasurement(true);
   };
 
+  useEffect(() => {
+    batteries.forEach((battery, index) => {
+      const canvas = document.getElementById(
+        `powerChart${index}`
+      ) as HTMLCanvasElement;
+      const ctx = canvas?.getContext("2d");
+
+      if (ctx && Chart.getChart(ctx)) {
+        Chart.getChart(ctx).destroy();
+      }
+
+      if (ctx) {
+        new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: ["Power Consumption", "Power Generation"],
+            datasets: [
+              {
+                label: "Power (kW)",
+                backgroundColor: ["#52eb97", "#a4eb52"],
+                data: [
+                  battery?.measurements[0]?.powerConsumption ?? 0,
+                  battery?.measurements[0]?.powerGeneration ?? 0,
+                ],
+                barThickness: 30,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            scales: {
+              x: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Power (kW)",
+                  font: {
+                    family: "'Jost', sans-serif",
+                    weight: "bold",
+                  },
+                },
+                ticks: {
+                  font: {
+                    family: "'Jost', sans-serif",
+                    weight: "bold",
+                  },
+                },
+              },
+              y: {
+                ticks: {
+                  font: {
+                    family: "'Jost', sans-serif",
+                    weight: "bold",
+                  },
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+          },
+        });
+      }
+    });
+  }, [batteries]);
+
   return (
     <>
       <NavBar />
@@ -89,19 +159,34 @@ const Dashboard: React.FC = () => {
       <div className="dashboard">
         <h1>Battery Dashboard</h1>
         {/* <h2>Hi, Name!</h2> */}
-        <p>
+        <p className="dashboard-text">
           Welcome to the Dashboard, the central hub for your energy journey. In
           real-time, monitor critical metrics such as State of Charge (SoC),
-          temperature, and power dynamics to gain a comprehensive analysis of
-          your battery storage system.
+          State of Health (SoC), temperature, charge ratings, and power dynamics
+          to gain a comprehensive analysis of your battery storage system.
         </p>
         <div>
           <button className="add-battery-button" onClick={openModal}>
+            <span className="plus-icon">
+              <i className="fas fa-plus" style={{ color: "white" }}></i>
+            </span>{" "}
             Add Battery
           </button>
           {batteries.map((battery: Battery, index: number) => (
             <>
-              <BatteryHeader battery={battery} />
+              {console.log(
+                "------",
+                typeof battery?.measurements[0]?.chargeRate
+              )}
+              <div className="button-container">
+                <BatteryHeader battery={battery} />
+                <button
+                  className="measurements-button"
+                  onClick={() => simulateMeasurements(battery.batteryId)}
+                >
+                  <i className="fas fa-sync"></i> Simulate Measurements
+                </button>
+              </div>
               <div className="card-container">
                 <div className="card">
                   <div
@@ -125,14 +210,21 @@ const Dashboard: React.FC = () => {
                   <h3>State of Charge</h3>
                   <div className="progress-bar">
                     <CircularProgressbar
-                      value={battery?.measurements[0]?.stateOfCharge ?? 0}
-                      text={`${battery?.measurements[0]?.stateOfCharge ?? 0}%`}
+                      value={parseFloat(
+                        (battery?.measurements[0]?.stateOfCharge ?? 0).toFixed(
+                          2
+                        )
+                      )}
+                      text={`${(
+                        battery?.measurements[0]?.stateOfCharge ?? 0
+                      ).toFixed(2)}%`}
                       className="progress-bar-state-of-charge"
-                      strokeWidth={10}
+                      strokeWidth={8}
                       styles={buildStyles({
                         textColor: "#333",
                         pathTransition: "none",
                         trailColor: "#eee",
+                        backgroundColor: "#b19cd9",
                       })}
                     />
                   </div>
@@ -158,27 +250,23 @@ const Dashboard: React.FC = () => {
                       can affect battery efficiency and lifespan.
                     </p>
                   </div>
-                  <h3>Temperature</h3>
-                  <div className="progress-bar">
-                    <CircularProgressbar
-                      value={
-                        battery?.measurements[0]?.temperature.toFixed(2) ?? 0
-                      }
-                      text={`${
-                        battery?.measurements[0]?.temperature.toFixed(2) ?? 0
-                      }°C`}
-                      className="progress-bar-state-of-charge"
-                      strokeWidth={10}
-                      styles={buildStyles({
-                        textColor: "#333",
-                        pathTransition: "none",
-                        trailColor: "#eee",
-                      })}
-                    />
+                  <div className="metric">
+                    <h3>Temperature</h3>
+                    <div className="temperature-icon">
+                      <i className="fas fa-thermometer-half"></i>{" "}
+                      {/* Temperature icon */}
+                    </div>
+                    <p className="metric-value">
+                      {parseFloat(
+                        (battery?.measurements[0]?.temperature ?? 0).toFixed(2)
+                      )}
+                      K
+                    </p>
                   </div>
                   {/* <h4>HEALTH INDICATOR</h4> */}
                   <p>The battery is in a moderate state</p>
                 </div>
+
                 <div className="card">
                   <div
                     className="info-icon"
@@ -200,15 +288,15 @@ const Dashboard: React.FC = () => {
                   </div>
                   <h3>Charge Ratings</h3>
                   <div className="metric">
-                    <h4>Charge Rate</h4>
+                    <h4>• Charge Rate •</h4>
                     <p className="metric-value">
-                      {battery?.measurements[0]?.chargeRate.toFixed(2) ?? 0} kW
+                      {battery?.measurements[0]?.chargeRate ?? 0}kW
                     </p>
                   </div>
                   <div className="metric">
-                    <h4>Discharge Rate</h4>
+                    <h4>• Discharge Rate •</h4>
                     <p className="metric-value">
-                      {battery?.measurements[0]?.dischargeRate.toFixed(2) ?? 0}{" "}
+                      {battery?.measurements[0]?.dischargeRate ?? 0}
                       kW
                     </p>
                   </div>
@@ -241,8 +329,8 @@ const Dashboard: React.FC = () => {
                     <CircularProgressbar
                       value={battery?.measurements[0]?.stateOfHealth ?? 0}
                       text={`${battery?.measurements[0]?.stateOfHealth ?? 0}%`}
-                      className="progress-bar-temperature"
-                      strokeWidth={10}
+                      className="progress-bar-soh"
+                      strokeWidth={9}
                       styles={buildStyles({
                         textColor: "#333",
                         pathTransition: "none",
@@ -270,34 +358,20 @@ const Dashboard: React.FC = () => {
                 >
                   <p>The power generation is. the power consumption is.</p>
                 </div>
-                <h3>Power</h3>
-                <div className="metric">
-                  <h4>Power Consumption</h4>
-                  <p className="metric-value">
-                    {battery?.measurements[0]?.powerConsumption.toFixed(2) ?? 0}{" "}
-                    kW
-                  </p>
+                <h3>Power Metrics</h3>
+                <div>
+                  <canvas
+                    id={`powerChart${index}`}
+                    style={{ width: "750px", height: "150px" }}
+                  ></canvas>
                 </div>
-                <div className="metric">
-                  <h4>Power Generation</h4>
-                  <p className="metric-value">
-                    {battery?.measurements[0]?.powerGeneration.toFixed(2) ?? 0}{" "}
-                    kW
-                  </p>
-                </div>
-                {/* <h4>POWER STATE</h4> */}
                 <div className="efficiency-status">
                   <p>The system is operating efficiently</p>
                 </div>
               </div>
-              <button
-                className="add-battery-button"
-                onClick={() => simulateMeasurements(battery.batteryId)}
-              >
-                Simulate Measurements
-              </button>
             </>
           ))}
+
           {isModalOpen && (
             <div className="modal-overlay">
               <div className="modal">
