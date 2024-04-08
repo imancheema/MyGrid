@@ -4,12 +4,11 @@
 
 .ProfileManagement .main {
   margin-top: 2em;
-  margin-left: 5em;
   margin-right: 5em;
 }
 
 .ProfileManagement .PageHeader {
-  margin-left: 10em;
+  margin-left: 12em;
   font-size: 36px;
   font-weight: bold;
 }
@@ -36,19 +35,24 @@
   height: 30px;
 }
 
-.ProfileManagement form.Information button.cancel {
-  color: #57007b;
-  background-color: white;
-  border-color: #57007b;
-  border-radius: 1px;
+.ProfileManagement form.Information button.cancel,
+.ProfileManagement form.Information button.save {
+  border: none;
+  border-radius: 20px;
   width: 100px;
-  height: 25px;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--login-button);
+  color: white;
 }
 
-.ProfileManagement form.Information button.save {
-  background-color: #57007b;
-  margin-left: 1em;
-  color: white;
-  width: 100px;
-  height: 25px;
+.ProfileManagement form.Information button.cancel {
+  margin-right: 1em;
+}
+
+.ProfileManagement form.Information button.cancel:hover,
+.ProfileManagement form.Information button.save:hover {
+  background-color: var(--login-button-hover);
 }
