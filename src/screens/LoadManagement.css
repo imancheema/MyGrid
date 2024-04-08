@@ -16,6 +16,7 @@ body {
   margin-bottom: 2em;
   text-align: left;
   margin-left: 20px;
+  font-size: 18px;
 }
 
 .load-management-bg {
@@ -24,7 +25,6 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: #e1e5ec;
   z-index: -1;
 }
 
@@ -62,9 +62,10 @@ table.LoadTable {
 table.LoadTable td {
   width: 250px;
   height: 200px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border-radius: 12px;
-  flex-direction: column;
+  box-shadow: 0 0 10px rgba(79, 100, 129, 0.2);
+  padding: 20px;
 }
 
 table.LoadTable div.Load-Head {
@@ -130,7 +131,7 @@ table.LoadTable button.Delete {
 button.Add {
   font-size: 32px;
   border-radius: 100%;
-  background-color: #57007b;
+  background-color: var(--add-battery-button);
   border: none;
   color: white;
   margin-left: 20px;
