@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import LandingPageNavbar from "../components/LandingPageNavbar";
+import BatteryDashboard from "/src/assets/BatteryDashboard.png";
+import BatteryOptimization from "/src/assets/BatteryOptimization.png";
+import LoadManagement1 from "/src/assets/LoadManagement1.png";
+import LandingImg from "/src/assets/LandingImg.jpg";
+import LandingImage2 from "/src/assets/LandingImage2.jpg";
+import LandingImage4 from "/src/assets/LandingImage4.jpg";
 
 const LandingPage = () => {
-  const images = [
-    "src/assets/LandingImg.jpg",
-    "src/assets/LandingImage2.jpg",
-    "src/assets/LandingImage4.jpg",
-  ];
+  const images = [LandingImg, LandingImage2, LandingImage4];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -39,10 +41,7 @@ const LandingPage = () => {
       </div>
       <div className="how-it-works-columns">
         <div className="column">
-          <img
-            src="src\assets\BatteryDashboard.png"
-            alt="Battery Dashboard Image"
-          />
+          <img src={BatteryDashboard} alt="Battery Dashboard Image" />
           <h3>Battery Dashboard</h3>
           <p>
             Monitor the system’s health through a real-time overview of the
@@ -51,10 +50,7 @@ const LandingPage = () => {
           </p>
         </div>
         <div className="column">
-          <img
-            src="src\assets\BatteryOptimization.png"
-            alt="Battery Optimization Image"
-          />
+          <img src={BatteryOptimization} alt="Battery Optimization Image" />
           <h3>Battery Optimization</h3>
           <p>
             Elevate your energy storage experience with tailored algorithms,
@@ -63,10 +59,7 @@ const LandingPage = () => {
           </p>
         </div>
         <div className="column">
-          <img
-            src="src\assets\LoadManagement1.png"
-            alt="Load Management Image"
-          />
+          <img src={LoadManagement1} alt="Load Management Image" />
           <h3>Load Management</h3>
           <p>
             Monitor and analyze energy consumption patterns across your
