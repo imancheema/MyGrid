@@ -283,7 +283,7 @@ import { Load } from "../models/loads";
     }
 
     const optimizeBattery = (Loadschedule: Schedule[]) => {
-        let capacity = 500; //grab from database capacitance
+        let capacity = 100000; //grab from database capacitance
         let batchargespeed = 5; //grab from database energyGeneration
         let loadusetimes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //Measures how much electricity was used by a load at that hour
         //Where loadusetimes[0] == 00:00, loadusetimes[1] = 01:00, etc
@@ -353,8 +353,46 @@ import { Load } from "../models/loads";
 
           }
         })
-
         //Maria's algorithm here
+        const batterySoC: number[] = new Array(24).fill(0); //battery state of charge
+        const chargingStatus: number[] = new Array(24).fill(0); //charging status
+
+        // Charging schedule
+        const chargingTimes: [number, number][] = [
+            [0, 7],   
+            [19, 24]  
+        ];
+
+        // Iterate over each hour and calculate battery state of charge
+        for (let hour = 0; hour < 24; hour++) {
+            const withinChargingTimes = chargingTimes.some(([start, end]) => { // Check if the current hour falls within the charging times
+                return (hour >= start && hour < end) || (start > end && (hour >= start || hour < end));
+            });
+            // Calculate energy consumed by loads at this hour
+            let energyConsumed = loadusetimes[hour] || 0; // Calculate energy consumed by loads at this hour
+
+            let newSoC = batterySoC[(hour === 0 ? 24 : hour) - 1]; // Update battery state of charge for this hour & initialize with previous SoC
+            let isCharging = 0;
+
+            if (withinChargingTimes) {
+                newSoC = Math.min(0.8 * capacity, newSoC + (batchargespeed/100) * capacity); // Charge to 80% if within charging times
+                isCharging = 1;
+            } else {
+                if (newSoC < 0.2 * capacity) { // If not within charging times and SoC falls below 20%, charge another 5%
+                    newSoC = Math.min(0.8 * capacity, newSoC + (batchargespeed/100) * capacity);
+                    isCharging = 1;
+                }
+            }
+            newSoC = Math.max(0, newSoC - energyConsumed);// Subtract energy consumed
+            newSoC = Math.min(0.8 * capacity, Math.max(0.2 * capacity, newSoC)); // Ensure battery SoC stays between 20% to 80%
+
+            // Update battery state of charge for this hour
+            batterySoC[hour] = newSoC;
+            chargingStatus[hour] = isCharging;
+        }
+
+        console.log(batterySoC);
+        console.log(chargingStatus);
     }
 
     function renderEventContent(eventContent: EventContentArg) {
