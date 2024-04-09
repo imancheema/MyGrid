@@ -70,7 +70,7 @@ const LandingPage = () => {
       </div>
       <div className="why-its-important">
         <div className="why-its-important-content">
-          <h2>Why it's important?</h2>
+          <h2>Why is it important?</h2>
           <p>
             In an era where smart homes are now becoming a norm, efficient
             methods of using and storing are sought after to reduce costs and
