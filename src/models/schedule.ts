@@ -5,6 +5,7 @@ export type Schedule = {
     Dayofweek: Array<Boolean>;
     Repeat: Boolean;
     Title: string;
+    loadConsumption: number;
     StartRecur: string;
     EndRecur: string;
 }
