@@ -100,8 +100,8 @@ const Dashboard: React.FC = () => {
             labels: ["Power Consumption", "Power Generation"],
             datasets: [
               {
-                label: "Power (kW)",
-                backgroundColor: ["#52eb97", "#a4eb52"],
+                label: "Power (W)",
+                backgroundColor: ["#52eb97", "#98f679"],
                 data: [
                   battery?.measurements[0]?.powerConsumption ?? 0,
                   battery?.measurements[0]?.powerGeneration ?? 0,
@@ -117,7 +117,7 @@ const Dashboard: React.FC = () => {
                 beginAtZero: true,
                 title: {
                   display: true,
-                  text: "Power (kW)",
+                  text: "Power (W)",
                   font: {
                     family: "'Jost', sans-serif",
                     weight: "bold",
@@ -229,7 +229,7 @@ const Dashboard: React.FC = () => {
                     />
                   </div>
                   {/* <h4>HEALTH INDICATOR</h4> */}
-                  <p>The battery is in a moderate state</p>
+                  {/* <p>The battery is in a moderate state</p> */}
                 </div>
                 <div className="card">
                   <div
@@ -250,21 +250,18 @@ const Dashboard: React.FC = () => {
                       can affect battery efficiency and lifespan.
                     </p>
                   </div>
+                  <h3>Temperature</h3>
                   <div className="metric">
-                    <h3>Temperature</h3>
-                    <div className="temperature-icon">
-                      <i className="fas fa-thermometer-half"></i>{" "}
-                      {/* Temperature icon */}
-                    </div>
                     <p className="metric-value">
                       {parseFloat(
                         (battery?.measurements[0]?.temperature ?? 0).toFixed(2)
                       )}
                       K
                     </p>
+                    <div className="temperature-icon">
+                      <i className="fas fa-thermometer-half"></i>{" "}
+                    </div>
                   </div>
-                  {/* <h4>HEALTH INDICATOR</h4> */}
-                  <p>The battery is in a moderate state</p>
                 </div>
 
                 <div className="card">
@@ -286,25 +283,21 @@ const Dashboard: React.FC = () => {
                       supplies power.
                     </p>
                   </div>
-                  <h3>Charge Ratings</h3>
+                  <h3>Charge Rating</h3>
                   <div className="metric">
-                    <h4>• Charge Rate •</h4>
+                    {/* <h4>• Charge Rate •</h4> */}
                     <p className="metric-value">
-                      {battery?.measurements[0]?.chargeRate ?? 0}kW
+                      {battery?.measurements[0]?.chargeRate ?? 0}A
                     </p>
+                    <div className="lightning-icon">
+                      {" "}
+                      {/* Corrected class name */}
+                      <i className="fas fa-bolt"></i>
+                    </div>
                   </div>
-                  <div className="metric">
-                    <h4>• Discharge Rate •</h4>
-                    <p className="metric-value">
-                      {battery?.measurements[0]?.dischargeRate ?? 0}
-                      kW
-                    </p>
-                  </div>
-                  {/* <h4>POWER STATE</h4> */}
-                  <div className="efficiency-status">
-                    <p>The system is operating efficiently</p>
-                  </div>
+                  <div className="metric"></div>
                 </div>
+
                 <div className="card">
                   <div
                     className="info-icon"
@@ -339,7 +332,7 @@ const Dashboard: React.FC = () => {
                     />
                   </div>
                   {/* <h4>CURRENT TEMPERATURE</h4> */}
-                  <p>The battery is in a normal state</p>
+                  {/* <p>The battery is in a normal state</p> */}
                 </div>
                 {/* Power generation/consumption chart card */}
               </div>
@@ -365,9 +358,9 @@ const Dashboard: React.FC = () => {
                     style={{ width: "750px", height: "150px" }}
                   ></canvas>
                 </div>
-                <div className="efficiency-status">
+                {/* <div className="efficiency-status">
                   <p>The system is operating efficiently</p>
-                </div>
+                </div> */}
               </div>
             </>
           ))}
