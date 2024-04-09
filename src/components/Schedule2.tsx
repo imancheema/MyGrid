@@ -17,7 +17,7 @@ import { createSchedule, deleteSchedule, getScheduleByLoadID } from "../frontend
 import { Schedule } from "../models/schedule";
 import { Load } from "../models/loads";
 
-    const userId = JSON.parse(sessionStorage.getItem('user') || '')?.id;
+    const userId = JSON.parse(sessionStorage.getItem('user') || '{}')?.id || "";
 
     interface ScheduleAppState {
         weekendsVisible: boolean;

@@ -20,7 +20,7 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
     });
   }, []);
   const addLoad = () => {
-    const userId = JSON.parse(sessionStorage.getItem('user') || '')?.id || '';
+    const userId = JSON.parse(sessionStorage.getItem('user') || '{}')?.id || '';
     loadInfo.Name = (
       document.getElementById("Loadname") as HTMLInputElement
     ).value;
