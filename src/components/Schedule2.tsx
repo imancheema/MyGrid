@@ -5,26 +5,26 @@ import {
     EventApi,
     DateSelectArg,
     EventClickArg,
-    EventContentArg,
-    EventChangeArg,
+    EventContentArg
   } from '@fullcalendar/core';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { createEventId, initialize_initial_events} from './event-utils';
-import { getLoadsByUserID, createLoad } from "../frontend-services/loads.services";
+import { getLoadsByUserID } from "../frontend-services/loads.services";
 import { createSchedule, deleteSchedule, getScheduleByLoadID } from "../frontend-services/schedule.services";
 import { Schedule } from "../models/schedule";
 import { Load } from "../models/loads";
 
-    const userId = "mv0QrbUwy9N7tCq0lyER";
+    const userId = JSON.parse(sessionStorage.getItem('user') || '')?.id;
 
     interface ScheduleAppState {
         weekendsVisible: boolean;
         currentEvents: EventApi[];
         loadData: Load[];
         scheduleData: Schedule[];
+        finishedLoading: boolean;
     }
 
     export default class Schedule2 extends React.Component<{}, ScheduleAppState> {
@@ -69,15 +69,17 @@ import { Load } from "../models/loads";
         // Update state once with all 3 responses
         this.state.scheduleData = allSchedules;
         this.setState({scheduleData: allSchedules, loadData: loads});
+        this.state.finishedLoading = true;
       }
         state: ScheduleAppState = {
             weekendsVisible: true,
             currentEvents: [],
             scheduleData: [],
             loadData: [],
+            finishedLoading: false,
         };
         render() {
-          if (!this.state.scheduleData.length) {
+          if (!this.state.finishedLoading) {
             return(
               <div className="loading">
                 Loading Calendar...
@@ -151,16 +153,16 @@ import { Load } from "../models/loads";
                             </select>
                           </div>
                           <div className="q2">Please enter what date you want the schedule to start:
-                           <input id="load-startdate" className ="input2" type="date"></input>
+                           <input id="load-startdate" className ="input1" type="date"></input>
                            </div>
                           <div className="q3">Please enter what date you want the schedule to end: 
-                          <input id="load-enddate" className ="input3" type="date"></input>
+                          <input id="load-enddate" className ="input2" type="date"></input>
                           </div>
                           <div className="q2">Please enter what time you want the load to start:
-                           <input id="load-start" className ="input2" onChange={LoadShift} type="time"></input>
+                           <input id="load-start" className ="input3" onChange={LoadShift} type="time"></input>
                            </div>
                           <div className="q3">Please enter what time you want the load to end: 
-                          <input id="load-end" className ="input3" onChange={LoadShift} type="time"></input>
+                          <input id="load-end" className ="input4" onChange={LoadShift} type="time"></input>
                           </div>
                           <div className="q4">Please specify what day(s) you want the event to run on</div>
                           <div className="day">
@@ -189,7 +191,7 @@ import { Load } from "../models/loads";
                           </div>
                       </div>
                   </dialog>
-
+                  <div className="Optimized" id="optimizedisplay"></div>
                 </div>
               )
             }
@@ -229,7 +231,7 @@ import { Load } from "../models/loads";
             })
           }
 
-          handleEventChange = (eventArg: EventChangeArg) => {
+          handleEventChange = () => {
 
           }
     };
@@ -286,16 +288,6 @@ import { Load } from "../models/loads";
         let capacity = 100000; //grab from database capacitance
         let batchargespeed = 5; //grab from database energyGeneration
         let loadusetimes = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0] //Measures how much electricity was used by a load at that hour
-        //Where loadusetimes[0] == 00:00, loadusetimes[1] = 01:00, etc
-
-        //Create a new load of type charge battery
-        // const loaddata: Load = {
-        //   Id: userId,
-        //   Name: "Optimized Charge",
-        //   Type: "Charge Battery",
-        //   Powerusage: 0,
-        // }
-        //createLoad(loaddata,userId);
 
         //Grab today's date and tomorrow's date
         let datdate = new Date()
@@ -304,7 +296,6 @@ import { Load } from "../models/loads";
         let tomorrowTime = datdate.toISOString()
         let today = dateTime.split("T")[0]
         let tomorrow = tomorrowTime.split("T")[0]
-        
         let tomorrowDate = datdate.toDateString().split(' ')[0]
 
         //Check tomorrow's day
@@ -335,21 +326,21 @@ import { Load } from "../models/loads";
 
             //Adjustments for first hour (if start not rounded to a xx:00)
             let difference = 60 - parseInt(min)
-            loadusetimes[parseInt(hour)] = difference/60 * schedule.loadConsumption
+            loadusetimes[parseInt(hour)] = loadusetimes[parseInt(hour)] + difference/60 * schedule.loadConsumption
             hour = (parseInt(hour) + 1).toString()
 
             //Until we reach the last hour
             while (parseInt(hour) < parseInt(endhour)){
-              loadusetimes[parseInt(hour)] = schedule.loadConsumption
+              loadusetimes[parseInt(hour)] = loadusetimes[parseInt(hour)] + schedule.loadConsumption
               hour = (parseInt(hour) + 1).toString()
             }
 
             //Adjustments for last hour (if end not rounded to a xx:00)
             difference = parseInt(endminute)
-            loadusetimes[parseInt(hour)] = difference/60 * schedule.loadConsumption
+            loadusetimes[parseInt(hour)] = loadusetimes[parseInt(hour)] + difference/60 * schedule.loadConsumption
           
             //Display the values of the array
-            console.log(loadusetimes)
+            //console.log(loadusetimes)
 
           }
         })
@@ -378,7 +369,7 @@ import { Load } from "../models/loads";
                 newSoC = Math.min(0.8 * capacity, newSoC + (batchargespeed/100) * capacity); // Charge to 80% if within charging times
                 isCharging = 1;
             } else {
-                if (newSoC < 0.2 * capacity) { // If not within charging times and SoC falls below 20%, charge another 5%
+                if (newSoC < 0.3 * capacity) { // If not within charging times and SoC falls below 20%, charge another 5%
                     newSoC = Math.min(0.8 * capacity, newSoC + (batchargespeed/100) * capacity);
                     isCharging = 1;
                 }
@@ -391,8 +382,45 @@ import { Load } from "../models/loads";
             chargingStatus[hour] = isCharging;
         }
 
-        console.log(batterySoC);
-        console.log(chargingStatus);
+        //Code for adding the new schedules for charging
+        let x = 0
+        let starttime = -1
+        let endtime = -1
+        let start = true //Start not set yet
+        let message = "Charge Schedule: <br>"
+        while(x < 24){
+          if ((chargingStatus[x] == 1) && (x != 23)){//Check if charge status is true
+            if ((starttime == -1) && (start)) { //Check if we set a start time yet
+              
+              starttime = x //Set starttime
+              start = false //Set state = set
+            }
+          }else if((!start) || (x == 23)){//If start was set and charging status was false, we have a charge cycle
+            endtime = x
+            let startstring = ""
+            let endstring = ""
+            if (starttime < 10){
+              startstring = "0" + starttime.toString() + ":00"
+            }else{
+              startstring = starttime.toString() + ":00"
+            }
+            if (endtime < 10){
+              endstring = "0" + endtime.toString() + ":00"
+            }else{
+              endstring = endtime.toString() + ":00<br>"
+            }
+
+            message = message + startstring + " - " + endstring
+
+            //Reset variables
+            starttime = -1
+            endtime = -1
+            start = true
+          }
+          x = x + 1
+        }
+        (document.getElementById("optimizedisplay") as HTMLDivElement).innerHTML = message
+
     }
 
     function renderEventContent(eventContent: EventContentArg) {

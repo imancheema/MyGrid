@@ -52,7 +52,7 @@ const getRandom = (min, max, precision) => {
 };
 
 export async function simulateData({ batteryId, numberOfEntries = 1 }) {
-  const userId = "mv0QrbUwy9N7tCq0lyER";
+  const userId = JSON.parse(sessionStorage.getItem("user") || "")?.id;
   const loads = await getLoadsByUserId(userId);
 
   // console.log("-------loads", loadsResponse);
