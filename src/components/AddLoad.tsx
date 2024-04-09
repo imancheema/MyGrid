@@ -12,7 +12,7 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
     Id: isAdding ? "" : modalData.load.Id,
     batteryId: isAdding ? "" : modalData.load.batteryId,
   });
-  const [batteries, setBatteries] = useState();
+  const [batteries, setBatteries] = useState([{batteryId: "", name: ""}]); //PROBLEM HERE, I ASSIGNED NULL HERE
   const [batteryId, setBatteryId] = useState(modalData?.load?.batteryId);
   useEffect(() => {
     getAllBatteries().then((response) => {
@@ -20,7 +20,7 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
     });
   }, []);
   const addLoad = () => {
-    const userId = "mv0QrbUwy9N7tCq0lyER";
+    const userId = JSON.parse(sessionStorage.getItem('user') || '')?.id || '';
     loadInfo.Name = (
       document.getElementById("Loadname") as HTMLInputElement
     ).value;
