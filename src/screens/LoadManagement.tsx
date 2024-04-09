@@ -13,7 +13,7 @@ const LoadManagement = () => {
 
   const [isLoadAdded, setIsLoadAdded] = useState(false);
   const [loads, setloads] = useState([]);
-  const userId = "mv0QrbUwy9N7tCq0lyER"
+  const userId = JSON.parse(sessionStorage.getItem('user') || '{}')?.id || '';
   useEffect(() => {
     getLoadsByUserID(userId).then((response) => setloads(response.loads));
     setIsLoadAdded(false);

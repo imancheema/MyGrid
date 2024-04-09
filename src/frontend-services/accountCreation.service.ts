@@ -14,7 +14,7 @@ interface ICreateUser {
 
 export const updateUser = async (user: ICreateUser) => {
   try{
-    const userKey = JSON.parse(sessionStorage.getItem("user") || "");
+    const userKey = JSON.parse(sessionStorage.getItem("user") || "{}");
     const response = await axios.put(`${BASE_URL}/users/${userKey.id}`, user)
     return response.data;
   } catch (error) {
