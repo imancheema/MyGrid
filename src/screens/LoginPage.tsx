@@ -77,7 +77,7 @@ const LoginPage = () => {
             type="text"
             id="email"
             name="email"
-            placeholder="email"
+            placeholder="Email address"
           ></input>
           <br />
           <label htmlFor="password">Password</label>
@@ -87,7 +87,7 @@ const LoginPage = () => {
             type="password"
             id="password"
             name="password"
-            placeholder="password"
+            placeholder="Password"
           ></input>
           <br />
           <div hidden={showCredErr} className="invalid-text" id="invalid-creds">
@@ -101,7 +101,7 @@ const LoginPage = () => {
             Please verify your email and try again
           </div>
           <br />
-          <a href="">Forgot Password?</a>
+          <a href="http://localhost:5173/ForgetPassword">Forgot Password?</a>
           <br />
           <button type="submit" className="account-button">
             Login Now

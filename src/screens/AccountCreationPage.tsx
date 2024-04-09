@@ -1,5 +1,6 @@
 import "./SimplePages.css";
 import React, { useState } from "react";
+import logo from "../assets/Logo.png";
 import {
   UserCredential,
   createUserWithEmailAndPassword,
@@ -53,7 +54,7 @@ const LoginPage = () => {
           );
         await sendEmailVerification(newUserCredential.user);
         await addUser();
-        window.location.href = "http://localhost:5173/Login";
+        window.location.href = "http://localhost:5173/UserAuth";
       } catch (error) {
         if (
           error.code === "auth/invalid-email" ||
@@ -77,8 +78,8 @@ const LoginPage = () => {
   return (
     <body className="login-body">
       <div>
-        <nav className="account-nav">
-          <div className="logo">Logo</div>
+        <nav className="logo">
+        <img src={logo} alt="logo"/>
         </nav>
         <form onSubmit={handleSubmit} className="info-container">
           <div className="title-text">
