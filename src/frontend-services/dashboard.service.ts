@@ -47,10 +47,11 @@ export const getAllBatteries = async() => {
 // }
 
 
-export const simulateData = async (batteryId: string, withLoad: boolean, numberOfLoads: number) => {
+export const simulateData = async (batteryId: string, withLoad: boolean, numberOfLoads: number, userId: string) => {
   await axios.post(`${BASE_URL}/batteries/${batteryId}/simulate`, {
     withLoad,
     numberOfLoads,
+    userId,
   });
 }
 export const deleteBattery = async(batteryId: string) => {

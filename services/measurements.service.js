@@ -51,11 +51,8 @@ const getRandom = (min, max, precision) => {
   return value.toFixed(precision) * 1;
 };
 
-export async function simulateData({ batteryId, numberOfEntries = 1 }) {
-  const userId = JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "";
+export async function simulateData({ batteryId, numberOfEntries = 1, userId }) {
   const loads = await getLoadsByUserId(userId);
-
-  // console.log("-------loads", loadsResponse);
   const totalPowerUsage = loads.reduce(
     (accumulator, load) => accumulator + load.Powerusage,
     0

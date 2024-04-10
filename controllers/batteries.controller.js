@@ -132,8 +132,14 @@ router.get("/:batteryId/measurements", async (req, res) => {
 router.post("/:batteryId/simulate", async (req, res) => {
   try {
     const { batteryId } = req.params;
-    const { numberOfEntries, withLoad, numberOfLoads } = req?.body;
-    await simulateData({ batteryId, numberOfEntries, withLoad, numberOfLoads });
+    const { numberOfEntries, withLoad, numberOfLoads, userId } = req?.body;
+    await simulateData({
+      batteryId,
+      numberOfEntries,
+      withLoad,
+      numberOfLoads,
+      userId,
+    });
   } catch (error) {
     console.log("---error", error);
   }

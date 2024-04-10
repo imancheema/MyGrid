@@ -44,8 +44,10 @@ const Dashboard: React.FC = () => {
   const [isBatteryAdded, setIsBatteryAdded] = useState(false);
   const [batteries, setBatteries] = useState<BatteriesState[]>([]);
   const [infoIconHovered, setInfoIconHovered] = useState(-1);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
+    setUserId(JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "");
     getAllBatteries().then((response) => {
       setBatteries(response.batteries);
     });
@@ -77,8 +79,8 @@ const Dashboard: React.FC = () => {
     setIsBatteryAdded(true);
   };
 
-  const simulateMeasurements = (batteryId: string) => {
-    simulateData(batteryId, true, 1);
+  const simulateMeasurements = (batteryId: string, userId: string) => {
+    simulateData(batteryId, true, 1, userId);
     setAddedNewMeasurement(true);
   };
 
@@ -174,15 +176,13 @@ const Dashboard: React.FC = () => {
           </button>
           {batteries.map((battery: Battery, index: number) => (
             <>
-              {console.log(
-                "------",
-                typeof battery?.measurements[0]?.chargeRate
-              )}
               <div className="button-container">
                 <BatteryHeader battery={battery} />
                 <button
                   className="measurements-button"
-                  onClick={() => simulateMeasurements(battery.batteryId)}
+                  onClick={() =>
+                    simulateMeasurements(battery.batteryId, userId)
+                  }
                 >
                   <i className="fas fa-sync"></i> Simulate Measurements
                 </button>
