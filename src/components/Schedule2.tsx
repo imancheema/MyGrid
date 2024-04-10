@@ -407,10 +407,10 @@ import { Load } from "../models/loads";
             if (endtime < 10){
               endstring = "0" + endtime.toString() + ":00"
             }else{
-              endstring = endtime.toString() + ":00<br>"
+              endstring = endtime.toString() + ":00"
             }
 
-            message = message + startstring + " - " + endstring
+            message = message + startstring + " - " + endstring + "<br>"
 
             //Reset variables
             starttime = -1
