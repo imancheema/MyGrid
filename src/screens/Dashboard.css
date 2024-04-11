@@ -346,28 +346,53 @@ h4 {
 }
 
 .card .metric-value {
-  font-size: 30px;
+  font-size: 28px;
   font-weight: 500;
   color: rgb(51, 51, 51);
   margin: 0;
   padding: 0;
   margin-bottom: 19px;
   font-weight: 600;
-  margin: 3px;
+  /* margin: 3px; */
   text-shadow: 1px 1px 2px rgba(199, 189, 189, 0.5);
-}
-
-.metric .temperature-icon {
-  font-size: 72px;
-  color: var(--temperature-icon);
 }
 
 .metric {
   margin-bottom: 5px;
+  position: relative;
+  text-align: center;
 }
 
-.metric h4 {
+.metric-value {
+  font-size: 30px;
+  font-weight: 600;
+  color: rgb(51, 51, 51);
+  margin: 3px 0;
+  padding: 0;
+  text-shadow: 1px 1px 2px rgba(199, 189, 189, 0.5);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.temperature-icon {
+  font-size: 140px;
+  color: var(--temperature-icon);
+  position: relative;
   margin: 0;
+  padding: 0;
+  line-height: 0.8;
+}
+
+.lightning-icon {
+  font-size: 140px;
+  color: var(--temperature-icon);
+  position: relative;
+  margin: 0;
+  padding: 0;
+  line-height: 0.8;
 }
 
 .progress-bar-soh {

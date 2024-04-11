@@ -6,12 +6,14 @@ import logo from "../assets/Logo.png";
 import { getUserByEmail } from "../frontend-services/accountCreation.service.ts";
 import { useState } from "react";
 import LandingPageNavbar from "../components/LandingPageNavbar.tsx";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [showCredErr, setShowCredErr] = useState(true);
   const [showVerifyErr, setShowVerifyErr] = useState(true);
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: Event) => {
     const auth = firebase.auth;
     var emailElement = document.getElementById("email");
     var passwordElement = document.getElementById("password");
@@ -44,12 +46,12 @@ const LoginPage = () => {
       if (user.emailVerified) {
         const response = await getUserByEmail(email);
         sessionStorage.setItem("user", JSON.stringify(response.data.user[0]));
-        window.location.href = "http://localhost:5173/dashboard";
+        navigate("/dashboard");
       } else {
         setShowVerifyErr(false);
       }
       // ...
-    } catch (error) {
+    } catch (error: any) {
       if (
         error.code === "auth/invalid-email" ||
         error.code === "auth/missing-password" ||

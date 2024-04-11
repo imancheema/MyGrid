@@ -12,15 +12,22 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
     Id: isAdding ? "" : modalData.load.Id,
     batteryId: isAdding ? "" : modalData.load.batteryId,
   });
-  const [batteries, setBatteries] = useState([{batteryId: "", name: ""}]); //PROBLEM HERE, I ASSIGNED NULL HERE
+  const [batteries, setBatteries] = useState([]);
   const [batteryId, setBatteryId] = useState(modalData?.load?.batteryId);
   useEffect(() => {
     getAllBatteries().then((response) => {
       setBatteries(response.batteries);
     });
   }, []);
+
+  useEffect(() => {
+    if (!batteryId || batteryId === "") {
+      setBatteryId(batteries[0]?.batteryId);
+    }
+  }, [batteries]);
   const addLoad = () => {
-    const userId = JSON.parse(sessionStorage.getItem('user') || '{}')?.id || '';
+    const userId = JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "";
+
     loadInfo.Name = (
       document.getElementById("Loadname") as HTMLInputElement
     ).value;
@@ -91,8 +98,8 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
               onChange={(e) => setBatteryId(e.target.value)}
             >
               {batteries?.map((battery, index) => (
-                <option key={index} value={battery.batteryId}>
-                  {battery.name}
+                <option key={index} value={battery?.batteryId}>
+                  {battery?.name}
                 </option>
               ))}
             </select>

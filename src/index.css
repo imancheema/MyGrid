@@ -24,9 +24,10 @@
   --delete-battery-button-hover: #124081;
   --measurements-button-outline: #044fbe;
 
-  --state-of-charge-progress-bar: #7fd761;
-  --state-of-health-progress-bar: #7fd761;
-  --temperature-icon: #7fd761;
+  --state-of-charge-progress-bar: #96f277;
+  --state-of-health-progress-bar: #96f277;
+  --temperature-icon: #dff5ccd2;
+
   --charge-fonts: #7fd761;
 
   /* --state-of-charge-progress-bar: #92ec74; */
