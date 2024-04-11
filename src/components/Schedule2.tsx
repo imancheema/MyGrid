@@ -68,7 +68,6 @@ import { Load } from "../models/loads";
 
         // Update state once with all 3 responses
         this.state.scheduleData = allSchedules;
-        console.log(allSchedules)
         this.setState({scheduleData: allSchedules, loadData: loads});
         this.state.finishedLoading = true;
       }
