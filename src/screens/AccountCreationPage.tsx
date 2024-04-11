@@ -1,5 +1,7 @@
-import "./SimplePages.css";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import "./SimplePages.css";
 import logo from "../assets/Logo.png";
 import {
   UserCredential,
@@ -12,6 +14,7 @@ import firebase from "../../firebase.js";
 //TODO Validation for proper email, phone number, postal code
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -36,7 +39,7 @@ const LoginPage = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: Event) => {
     const auth = firebase.auth;
     e.preventDefault();
 
@@ -54,7 +57,7 @@ const LoginPage = () => {
           );
         await sendEmailVerification(newUserCredential.user);
         await addUser();
-        window.location.href = "http://localhost:5173/UserAuth";
+        navigate("/UserAuth");
       } catch (error) {
         if (
           error.code === "auth/invalid-email" ||
@@ -79,7 +82,7 @@ const LoginPage = () => {
     <body className="login-body">
       <div>
         <nav className="logo">
-        <img src={logo} alt="logo"/>
+          <img src={logo} alt="logo" />
         </nav>
         <form onSubmit={handleSubmit} className="info-container">
           <div className="title-text">
