@@ -10,7 +10,7 @@ import SchedulePage from "./screens/SchedulePage";
 import LoginPage from "./screens/LoginPage";
 import AccountCreationPage from "./screens/AccountCreationPage";
 import UserAuthPage from "./screens/UserAuthPage";
-import AuthSuccessPage from "./screens/AuthSuccessPage";
+import ForgetPasswordPage from "./screens/ForgetPassword";
 
 function App() {
   return (
@@ -24,8 +24,16 @@ function App() {
         <Route path="/Schedule" element={<SchedulePage />} />
         <Route path="/AccountCreate" element={<AccountCreationPage />} />
         <Route path="/Login" element={<LoginPage />} />
+        <Route path="/ForgetPassword" element={<ForgetPasswordPage />} />
         <Route path="/UserAuth" element={<UserAuthPage />} />
-        <Route path="/AuthSuccess" element={<AuthSuccessPage />} />
+        <Route path="/Nav" element={<NavBar />} />
+        <Route path="/LoadManagement" element={<LoadManagement />} />
+        <Route path="/Profile" element={<ProfileManagement />} />
+        <Route path="/EnergyAnalysis" element={<EnergyAnalysis />} />
+        <Route path="/Schedule" element={<SchedulePage />} />
+        <Route path="/AccountCreate" element={<AccountCreationPage />} />
+        <Route path="/Login" element={<LoginPage />} />
+        <Route path="/UserAuth" element={<UserAuthPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/load-management" element={<LoadManagement />} />
         <Route path="/profile" element={<ProfileManagement />} />
