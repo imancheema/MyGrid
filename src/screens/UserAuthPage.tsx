@@ -1,5 +1,6 @@
 import "./SimplePages.css";
 import logo from "../assets/Logo.png";
+import VerificationSuccess from "../assets/VerificationSuccess.png";
 
 const UserAuthPage = () => {
   return (
@@ -11,10 +12,7 @@ const UserAuthPage = () => {
         <form className="info-container">
           <div className="title-text">
             <h1>One Final Step</h1>
-            <img
-              src="src\assets\VerificationSuccess.png"
-              alt="Verification Success"
-            ></img>
+            <img src={VerificationSuccess} alt="Verification Success"></img>
             <h2>Check your email</h2>
             <p>
               Thank you for registering your account with us, we have sent{" "}
