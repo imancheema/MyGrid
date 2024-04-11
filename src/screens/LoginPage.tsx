@@ -103,7 +103,7 @@ const LoginPage = () => {
             Please verify your email and try again
           </div>
           <br />
-          <a href="http://localhost:5173/ForgetPassword">Forgot Password?</a>
+          <a href="/ForgetPassword">Forgot Password?</a>
           <br />
           <button type="submit" className="account-button">
             Login Now
