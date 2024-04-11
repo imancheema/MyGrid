@@ -98,7 +98,7 @@ b {
   border-style: solid;
   border-radius: 1px;
   width: 56.5em;
-  height: 350px;
+  height: 400px;
 }
 
 .Schedule-sidebar dialog.modal div.info div.q1,div.q2,div.q3,div.q4,div.q5 {
@@ -184,7 +184,7 @@ b {
 
 .Schedule-sidebar dialog.modal div.info button.AddNewEvent {
   margin-left: 22em;
-  margin-top: 0em;
+  margin-top: 1em;
   height: 2em;
   background-color: #04aa6d;
   border-radius: 12px;

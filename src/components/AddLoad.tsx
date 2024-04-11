@@ -110,7 +110,7 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
           <input
             type="text"
             id="power"
-            placeholder="(kW)"
+            placeholder="(W)"
             defaultValue={loadInfo.Powerusage}
           ></input>
           <br></br>
