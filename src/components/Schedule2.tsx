@@ -345,7 +345,7 @@ const LoadShift = () => {
 };
 
 const optimizeBattery = (Loadschedule: Schedule[]) => {
-  let capacity = 3000; //grab from database capacitance
+  let capacity = 5000; //grab from database capacitance
   let batchargespeed = 5; //grab from database energyGeneration
   let loadusetimes = [
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
