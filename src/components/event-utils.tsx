@@ -25,7 +25,8 @@ export function initialize_initial_events(schedules: Schedule[]){
       allDay: false,
       daysOfWeek: schedule.Dayofweek.reduce((accum: Number[], val, index) => val == true ? [...accum, index] : accum, []),
       editable: true,
-      startRecur: todayStr,
+      startRecur: schedule.StartRecur,
+      endRecur: schedule.EndRecur,
       groupId: schedule.Id,
   }));
 }

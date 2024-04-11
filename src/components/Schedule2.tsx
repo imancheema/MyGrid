@@ -68,6 +68,7 @@ import { Load } from "../models/loads";
 
         // Update state once with all 3 responses
         this.state.scheduleData = allSchedules;
+        console.log(allSchedules)
         this.setState({scheduleData: allSchedules, loadData: loads});
         this.state.finishedLoading = true;
       }
@@ -318,7 +319,7 @@ import { Load } from "../models/loads";
 
         //Loop through schedule and find every schedule which is running tomorrow
         Loadschedule.forEach((schedule) => {
-          if ((schedule.StartRecur <= today ) && (schedule.EndRecur >= tomorrow) && (schedule.Dayofweek[day])){
+          if ((schedule.StartRecur <= today ) && (schedule.EndRecur > tomorrow) && (schedule.Dayofweek[day])){
             let hour = schedule.Start.split(":")[0]
             let min = schedule.Start.split(":")[1]  
             let endhour = schedule.End.split(":")[0]
@@ -369,7 +370,7 @@ import { Load } from "../models/loads";
                 newSoC = Math.min(0.8 * capacity, newSoC + (batchargespeed/100) * capacity); // Charge to 80% if within charging times
                 isCharging = 1;
             } else {
-                if (newSoC < 0.3 * capacity) { // If not within charging times and SoC falls below 20%, charge another 5%
+                if (newSoC < 0.3 * capacity) { // If not within charging times and SoC falls below 30%, charge another 5%
                     newSoC = Math.min(0.8 * capacity, newSoC + (batchargespeed/100) * capacity);
                     isCharging = 1;
                 }
