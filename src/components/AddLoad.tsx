@@ -19,6 +19,12 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
       setBatteries(response.batteries);
     });
   }, []);
+
+  useEffect(() => {
+    if (!batteryId || batteryId === "") {
+      setBatteryId(batteries[0]?.batteryId);
+    }
+  }, [batteries]);
   const addLoad = () => {
     const userId = JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "";
 
