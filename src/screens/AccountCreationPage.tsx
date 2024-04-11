@@ -61,7 +61,7 @@ const LoginPage = () => {
       } catch (error) {
         if (
           error.code === "auth/invalid-email" ||
-          error.code === "auth/email-already-exists"
+          error.code === "auth/email-already-in-use"
         ) {
           setEmailErr(false);
         }
