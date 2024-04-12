@@ -34,21 +34,21 @@ type BatteriesState = {
 };
 
 const Dashboard: React.FC = () => {
+  const userId = JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "";
   const [isModalOpen, setModalOpen] = useState(false);
   const [addedNewMeasurement, setAddedNewMeasurement] = useState(false);
   const [batteryInfo, setBatteryInfo] = useState({
     name: "",
     type: "",
     description: "",
+    userId,
   });
   const [isBatteryAdded, setIsBatteryAdded] = useState(false);
   const [batteries, setBatteries] = useState<BatteriesState[]>([]);
   const [infoIconHovered, setInfoIconHovered] = useState(-1);
-  const [userId, setUserId] = useState("");
 
   useEffect(() => {
-    setUserId(JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "");
-    getAllBatteries().then((response) => {
+    getAllBatteries(userId).then((response) => {
       setBatteries(response.batteries);
     });
     setIsBatteryAdded(false);
