@@ -8,6 +8,8 @@ import {
 import { useState } from "react";
 
 const ProfileManagement = () => {
+    const [checkBox, setCheckBox] = useState('password')
+
     const [formData, setFormData] = useState(() => {
         const storedUser = sessionStorage.getItem("user");
         if(storedUser) {
@@ -25,6 +27,10 @@ const ProfileManagement = () => {
         }
     });
 
+    const handleShowPassword = (e) => {
+        setCheckBox(checkBox === 'password' ? 'text' : 'password')
+    }
+
     const handleChange = (e) => {
         const {name, value} = e.target;
         setFormData((prevData: any) => ({
@@ -35,7 +41,6 @@ const ProfileManagement = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Hello hello");
         try{
             const auth = firebase.auth
             const user = auth.currentUser
@@ -53,6 +58,7 @@ const ProfileManagement = () => {
             alert("Failed to update profile " + error);
         }
     }
+
     return(
         <div className="ProfileManagement">
             <div>
@@ -78,7 +84,9 @@ const ProfileManagement = () => {
                     <br></br><br></br>
                     <label>Password</label>
                     <br></br>
-                    <input type="text" className="fullbox" name="password" value ={formData.password} onChange={handleChange}></input>
+                    <input type={checkBox} className="fullbox" name="password" value ={formData.password} onChange={handleChange}></input>
+                    <br></br>
+                    <input type="checkbox" id="checkbox" name="checkbox" onClick={handleShowPassword}></input>Show Password
                     <br></br><br></br>
                     <button className ="cancel">Cancel</button><button className="save">Save</button>
                 </form>

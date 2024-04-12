@@ -107,7 +107,7 @@
 }
 
 .modal-buttons button {
-  background-color: #4caf50;
+  background-color: var(--delete-battery-button);
   border: none;
   color: white;
   padding: 8px 30px; /* Adjust padding */
@@ -124,5 +124,5 @@
 }
 
 .modal-buttons button:hover {
-  background-color: #45a049;
+  background-color: var(--delete-battery-hover);
 }

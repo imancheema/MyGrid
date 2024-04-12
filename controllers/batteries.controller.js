@@ -12,8 +12,9 @@ import {
 import { simulateData } from "../services/measurements.service.js";
 
 // get all batteries
-router.get("/", async (req, res) => {
-  const batteries = await getBatteries();
+router.get("/user/:userId", async (req, res) => {
+  const { userId } = req?.params;
+  const batteries = await getBatteries(userId);
   res.status(200).send({
     status: "Success",
     message: `Successfully retrieved batteries ${JSON.stringify(batteries)}`,
@@ -45,15 +46,19 @@ router.get("/:batteryId", async (req, res) => {
 // create battery
 router.post("/", async (req, res) => {
   try {
-    const { name, description, type } = req?.body;
+    const { name, description, type, userId } = req?.body;
     if (!name) {
       throw new Error("Missing request parameter: name");
+    }
+    if (!userId) {
+      throw new Error("Missing request parameter: userId");
     }
 
     const batteryData = {
       name,
       type,
       description,
+      userId,
     };
 
     const newBatteryId = await createBattery(batteryData);
@@ -132,8 +137,14 @@ router.get("/:batteryId/measurements", async (req, res) => {
 router.post("/:batteryId/simulate", async (req, res) => {
   try {
     const { batteryId } = req.params;
-    const { numberOfEntries, withLoad, numberOfLoads } = req?.body;
-    await simulateData({ batteryId, numberOfEntries, withLoad, numberOfLoads });
+    const { numberOfEntries, withLoad, numberOfLoads, userId } = req?.body;
+    await simulateData({
+      batteryId,
+      numberOfEntries,
+      withLoad,
+      numberOfLoads,
+      userId,
+    });
   } catch (error) {
     console.log("---error", error);
   }

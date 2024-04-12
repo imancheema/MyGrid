@@ -1,4 +1,6 @@
 import logo from "../assets/Logo.png";
+import list2 from "../assets/List2.png";
+
 import "./NavBar.css";
 
 const NavBar = () => {
@@ -22,17 +24,14 @@ const NavBar = () => {
           <input
             type="image"
             onClick={SideNav}
-            src="src/assets/List1.png"
+            src={list2}
             style={{ width: "2em", height: "2em" }}
           ></input>
         </div>
       </div>
       <div id="mysidebar" className="sidebar">
         <a href="javascript:void(0)" className="closebtn" onClick={SideNav}>
-          <img
-            src="src/assets/List2.png"
-            style={{ width: "1em", height: "1em" }}
-          ></img>
+          <img src={list2} style={{ width: "1em", height: "1em" }}></img>
         </a>
         <a href="/dashboard">My Dashboard</a>
         {/* <a href="/EnergyAnalysis">Energy Analysis</a> */}

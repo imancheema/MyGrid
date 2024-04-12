@@ -12,6 +12,9 @@
   --secondary-color: #e6faa9cf;
   --background-color: #ffffff;
 
+  --login-button: #044fbe;
+  --login-button-hover: #124081;
+
   --card-border-color-two: #012788;
   --add-battery-button: #044fbe;
   --add-battery-button-hover: #124081;
@@ -21,15 +24,16 @@
   --delete-battery-button-hover: #124081;
   --measurements-button-outline: #044fbe;
 
-  --state-of-charge-progress-bar: #7fd761;
-  --state-of-health-progress-bar: #7fd761;
-  --temperature-icon: #7fd761;
+  --state-of-charge-progress-bar: #96f277;
+  --state-of-health-progress-bar: #96f277;
+  --temperature-icon: #dff5ccd2;
+
   --charge-fonts: #7fd761;
 
   /* --state-of-charge-progress-bar: #92ec74; */
-  --edit-button-color: #52eb97;
-  --delete-button-color: #f97171;
-  --view-button-color: #078ee0;
+  --edit-button-color: #044fbe;
+  --delete-button-color: #044fbe;
+  --view-button-color: #044fbe;
 
   /* --state-of-charge-progress-bar: #d1f48b;
   --state-of-health-progress-bar: #92ec74;
