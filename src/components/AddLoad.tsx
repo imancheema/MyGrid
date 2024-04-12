@@ -4,6 +4,7 @@ import { createLoad, editLoad } from "../frontend-services/loads.services.ts";
 import { getAllBatteries } from "../frontend-services/dashboard.service.ts";
 
 const AddLoad = ({ modalData }: any, { closeModal }: any) => {
+  const userId = JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "";
   const isAdding = modalData.type === "add";
   const [loadInfo] = useState({
     Name: isAdding ? "" : modalData.load.Name,
@@ -15,7 +16,7 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
   const [batteries, setBatteries] = useState([]);
   const [batteryId, setBatteryId] = useState(modalData?.load?.batteryId);
   useEffect(() => {
-    getAllBatteries().then((response) => {
+    getAllBatteries(userId).then((response) => {
       setBatteries(response.batteries);
     });
   }, []);
@@ -26,7 +27,7 @@ const AddLoad = ({ modalData }: any, { closeModal }: any) => {
     }
   }, [batteries]);
   const addLoad = () => {
-    const userId = JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "";
+    // const userId = JSON.parse(sessionStorage.getItem("user") || "{}")?.id || "";
 
     loadInfo.Name = (
       document.getElementById("Loadname") as HTMLInputElement

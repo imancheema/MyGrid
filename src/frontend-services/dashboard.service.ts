@@ -4,6 +4,7 @@ const BASE_URL = `http://localhost:3000`;
 
 interface ICreateBattery {
   name: string,
+  userId: string, 
   type?: string, 
   description?: string,
 }
@@ -15,12 +16,13 @@ export interface Battery {
   description?: string;
 }
 
-export const createBattery = async({name , type, description}: ICreateBattery) => {
+export const createBattery = async({name , type, description, userId}: ICreateBattery) => {
   try {
     const response = await axios.post(`${BASE_URL}/batteries/`, {
       name,
       type,
-      description
+      description,
+      userId,
     });
     return response;
   } catch (error) {
@@ -28,23 +30,15 @@ export const createBattery = async({name , type, description}: ICreateBattery) =
   }
 };
 
-export const getAllBatteries = async() => {
+export const getAllBatteries = async(userId: string) => {
+  console.log("----getAllBatteries", userId)
   try {
-    const response = await axios.get(`${BASE_URL}/batteries/`);
+    const response = await axios.get(`${BASE_URL}/batteries/user/${userId}`);
     return response.data;
   } catch (error) {
     throw new Error(`Unable to fetch all batteries: ${error}`);
   }
 };
-
-// export const getMostRecentMeasurementForBattery = async (batteryId: string) => {
-//   try {
-//     const response = await axios.get(`${BASE_URL}/batteries/${batteryId}/measurements`);
-//     return response.data.measurements;
-//   } catch (error) {
-//     throw new Error(`Unable to fetch measurements for batteryId=[${batteryId}]: ${error}`);
-//   }
-// }
 
 
 export const simulateData = async (batteryId: string, withLoad: boolean, numberOfLoads: number, userId: string) => {

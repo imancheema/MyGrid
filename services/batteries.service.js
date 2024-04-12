@@ -3,12 +3,18 @@ import firebase from "../firebase.js";
 
 const db = firebase.db;
 
-export async function getBatteries() {
+export async function getBatteries(userId) {
   const batteriesCollection = firebase.collection(db, "batteries");
-  const batteriesSnapshot = await firebase.getDocs(batteriesCollection);
+  const userRef = firebase.doc(db, "users", userId);
+  const batteriesQuery = firebase.query(
+    batteriesCollection,
+    firebase.where("userId", "==", userRef)
+  );
+  const batteriesSnapshot = await firebase.getDocs(batteriesQuery);
   const batteries = batteriesSnapshot.docs.map(async (doc) => {
     const battery = doc.data();
     const batteryRef = firebase.doc(db, "batteries", battery.batteryId);
+
     // Get measurements for each battery
     const measurementsCollection = firebase.collection(db, "measurements");
     const measurementsQuery = firebase.query(
@@ -99,11 +105,14 @@ export async function createBattery(batteryData) {
   try {
     const batteriesCollection = firebase.collection(db, "batteries");
     const batteryRef = firebase.doc(batteriesCollection);
+    const userRef = firebase.doc(db, "users", batteryData.userId);
+
     await firebase.setDoc(batteryRef, {
       name: batteryData.name,
       type: batteryData.type || null,
       description: batteryData.description || null,
       batteryId: batteryRef.id,
+      userId: userRef,
     });
     return batteryRef.id;
   } catch (error) {
