@@ -1,11 +1,29 @@
 # Capstone Project
 
-This repository contains the source code and documents for our COE70A/B Capstone Project for the 2023/24 school term. The goal of our capstone project is to create a web application which allows users to efficiently monitor their home loads and household electricity usage. Through our schedule system, users will also be able to schedule run times for their various loads. Users can also optimize their battery's charge schedule by running our battery optimization algorithm.
+MyGRID+ is an Application for Battery Storage Optimization project designed to enhance the efficiency, performance, and cost-effectiveness of energy storage systems, particularly batteries through an application. The project addresses the growing demand for effective management of battery systems, crucial for storing electricity from renewable sources and improving grid stability. 
+
+## Demo
+View it online here: https://battery-storage-optimization.web.app/
 
 ## How to Run:
 
-Run backend: npm run backend
-Run frontend: npm run dev
+1. Gather all files in local repo 
+
+```
+https://github.com/BrandonHTran/capstone-project.git
+```
+2. Download all dependencies/node-modules
+```
+npm install
+```
+
+3. To run local react app
+```
+npm run backend
+```
+```
+npm run dev
+```
 
 ## List of installed packages:
 
