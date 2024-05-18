@@ -1,11 +1,26 @@
-# Capstone Project
+# MyGrid+ : Web App for Battery Storage Optimization
 
-MyGRID+ is an Application for Battery Storage Optimization project designed to enhance the efficiency, performance, and cost-effectiveness of energy storage systems, particularly batteries through an application. The project addresses the growing demand for effective management of battery systems, crucial for storing electricity from renewable sources and improving grid stability. 
+## Overview
+MyGRID+ is a battery storage optimization application designed to enhance the efficiency, performance, and cost-effectiveness of utility-scale battery systems. These systems are crucial for storing renewable energy sources like solar and wind, and in improving grid stability and reliability.
+
+## Features
+- User Authentication and Profile Management
+- Battery Dashboard Monitoring
+- Energy Consumption Analysis and Load Management
+- Optimization Algorithms
+
+## Battery Simulation
+The Valence: U27_12XP lithium-ion battery was chosen for its reliability, high performance, and suitability for renewable energy sources like solar and wind. A MATLAB simulation was developed to analyze the battery's behavior under various conditions and retrieve data used for the battery dashboard on the website.
+
+<p align="center">
+  <img src="https://github.com/imancheema/MyGrid/assets/68870677/f4d82117-7890-4062-890b-f7d82cd4e6df" alt="Battery Simulation Screenshot">
+</p>
+<p align="center"><em>Figure 1: Battery Simulation</em></p>
 
 ## Demo
 View it online here: https://battery-storage-optimization.web.app/
 
-## How to Run:
+## How to Run
 
 1. Gather all files in local repo 
 
@@ -25,37 +40,4 @@ npm run backend
 npm run dev
 ```
 
-## List of installed packages:
-
-├── @fullcalendar/core@6.1.10
-├── @fullcalendar/daygrid@6.1.10
-├── @fullcalendar/interaction@6.1.10
-├── @fullcalendar/react@6.1.10
-├── @fullcalendar/timegrid@6.1.10
-├── @types/axios@0.14.0
-├── @types/react-dom@18.2.14
-├── @types/react@18.2.33
-├── @typescript-eslint/eslint-plugin@6.9.0
-├── @typescript-eslint/parser@6.9.0
-├── @vitejs/plugin-react@4.1.0
-├── axios@1.6.5
-├── chart.js@4.4.2
-├── cors@2.8.5
-├── csv-parse@5.5.5
-├── dotenv@16.3.1
-├── eslint-plugin-react-hooks@4.6.0
-├── eslint-plugin-react-refresh@0.4.4
-├── eslint@8.52.0
-├── express@4.18.2
-├── firebase@10.9.0
-├── nodemon@3.1.0
-├── react-chartjs-2@5.2.0
-├── react-circular-progressbar@2.1.0
-├── react-dom@18.2.0
-├── react-progress-bar@0.1.0
-├── react-router-dom@6.21.0
-├── react@18.2.0
-├── ts-node@10.9.2
-├── typescript@5.2.2
-├── undefined@0.1.0
-└── vite@4.5.2
+This project was jointly created with @BrandonHTran, @Steven1425 and Maria Saeed.
