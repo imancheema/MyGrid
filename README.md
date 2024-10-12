@@ -1,4 +1,5 @@
 # MyGrid+ : Web App for Battery Storage Optimization
+COE70A/B Capstone Project 2023/24.
 
 ## Overview
 MyGRID+ is a battery storage optimization application designed to enhance the efficiency, performance, and cost-effectiveness of utility-scale battery systems. These systems are crucial for storing renewable energy sources like solar and wind, and in improving grid stability and reliability.
